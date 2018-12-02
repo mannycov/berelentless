@@ -12,3 +12,5 @@ const GoalSchema = new Schema({
     default: Date.now
   }
 });
+
+module.exports = Goal = mongoose.model('goal', GoalSchema);

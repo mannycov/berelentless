@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const goals = require('./routes/api/goals');
+
 const app = express();
 
 // Body Parser Middleware
@@ -14,7 +16,10 @@ const db = require('./config/keys').mongoURI;
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected...'))
-  .catch((err => console.log(err)))
+  .catch((err => console.log(err)));
+
+// Use Routes
+app.use('/api/goals', goals);
 
 const port = process.env.PORT || 5000;
 
