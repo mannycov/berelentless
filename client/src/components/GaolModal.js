@@ -11,12 +11,11 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addGoal } from '../actions/goalActions';
-import uuid from 'uuid';
 
 class GoalModal extends Component {
   state = {
     modal: false,
-    name: ''
+    title: ''
   }
 
   toggle = () => {
@@ -26,15 +25,14 @@ class GoalModal extends Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.title]: e.target.value });
   }
 
   onSubmit = e => {
     e.preventDefault();
 
     const newGoal = {
-      id: uuid(),
-      name: this.state.name
+      title: this.state.title
     }
 
     // Add goal via addGoal action
@@ -66,7 +64,7 @@ class GoalModal extends Component {
                 <Label for="goal">Goal</Label>
                 <Input
                   type="text"
-                  name="name"
+                  title="title"
                   id="goal"
                   placeholder="Add Goal"
                   onChange={this.onChange}

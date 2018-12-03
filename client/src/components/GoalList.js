@@ -21,16 +21,16 @@ class GoalList extends Component {
       <Container>
         <ListGroup>
           <TransitionGroup className="goal-list">
-            {goals.map(({ id, name }) => (
-              <CSSTransition key={id} timeout={500} classNames="fade">
+            {goals.map(({ _id, title }) => (
+              <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   <Button
                     className="remove-btn"
                     color="danger"
                     size="small"
-                    onClick={this.onDeleteClick.bind(this, id)}
+                    onClick={this.onDeleteClick.bind(this, _id)}
                   >&times;</Button>
-                  {name}
+                  {title}
                 </ListGroupItem>
               </CSSTransition>
             ))}
