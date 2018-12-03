@@ -5,3 +5,17 @@ export const getGoals = () => {
     type: GET_GOALS
   };
 };
+
+export const deleteGoal = id => {
+  return {
+    type: DELETE_GOAL,
+    payload: id
+  };
+};
+
+export const addGoal = goal => {
+  return {
+    type: ADD_GOAL,
+    payload: goal
+  };
+};

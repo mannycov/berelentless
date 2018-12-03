@@ -15,6 +15,16 @@ export default function(state = initialState, action) {
     case GET_GOALS:
       return {
         ...state
+      };
+    case DELETE_GOAL:
+      return {
+        ...state,
+        goals: state.goals.filter(goal => goal.id !== action.payload)
+      }
+    case ADD_GOAL:
+      return {
+        ...state,
+        goals: [action.payload, ...state.goals]
       }
     default:
       return state;
