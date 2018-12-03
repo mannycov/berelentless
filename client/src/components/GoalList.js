@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import uuid from 'uuid';
+import { connect } from 'react-redux';
+import { getGoals } from '../actions/goalActions';
+import PropTypes from 'prop-types';
 
 class GoalList extends Component {
-  state = {
-    goals: [
-      { id: uuid(), name: 'Lose 10lbs.' },
-      { id: uuid(), name: 'Increase bench press 10lbs.' },
-      { id: uuid(), name: 'Run 2 miles daily' },
-      { id: uuid(), name: '25 pull-ups' }
-    ]
+
+  componentDidMount() {
+    this.props.getGoals();
   }
 
   render() {
-    const { goals } = this.state;
+    const { goals } = this.props.goal;
     return (
       <Container>
         <Button
@@ -56,4 +55,13 @@ class GoalList extends Component {
   }
 }
 
-export default GoalList;
+GoalList.propTypes = {
+  getGoals: PropTypes.func.isRequired,
+  goal: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  goal: state.goal
+});
+
+export default connect(mapStateToProps, { getGoals })(GoalList);
