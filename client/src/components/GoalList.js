@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Container, CardDeck, Card, CardImg, CardTitle, CardText, CardBody, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getGoals, deleteGoal } from '../actions/goalActions';
@@ -18,24 +18,40 @@ class GoalList extends Component {
   render() {
     const { goals } = this.props.goal;
     return (
+      // <Container>
+      //   <ListGroup>
+      //     <TransitionGroup className="goal-list">
+      //       {goals.map(({ _id, title }) => (
+      //         <CSSTransition key={_id} timeout={500} classNames="fade">
+      //           <ListGroupItem>
+      //             <Button
+      //               className="remove-btn"
+      //               color="danger"
+      //               size="small"
+      //               onClick={this.onDeleteClick.bind(this, _id)}
+      //             >&times;</Button>
+      //             {title}
+      //           </ListGroupItem>
+      //         </CSSTransition>
+      //       ))}
+      //     </TransitionGroup>
+      //   </ListGroup>
+      // </Container>
       <Container>
-        <ListGroup>
+        <CardDeck>
           <TransitionGroup className="goal-list">
             {goals.map(({ _id, title }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
-                <ListGroupItem>
-                  <Button
-                    className="remove-btn"
-                    color="danger"
-                    size="small"
-                    onClick={this.onDeleteClick.bind(this, _id)}
-                  >&times;</Button>
-                  {title}
-                </ListGroupItem>
+                <Card>
+                  <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+                  <CardBody>
+                    <CardTitle>{title}</CardTitle>
+                  </CardBody>
+                </Card>
               </CSSTransition>
             ))}
           </TransitionGroup>
-        </ListGroup>
+        </CardDeck>
       </Container>
     );
   }
