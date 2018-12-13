@@ -46,6 +46,13 @@ class GoalList extends Component {
                   <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
                   <CardBody>
                     <CardTitle>{title}</CardTitle>
+                    <CardText>This is the goal's description</CardText>
+                    <Button
+                      className="remove-btn"
+                      color="danger"
+                      size="small"
+                      onClick={this.onDeleteClick.bind(this, _id)}
+                    >&times;</Button>
                   </CardBody>
                 </Card>
               </CSSTransition>
