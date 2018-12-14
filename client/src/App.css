@@ -1,5 +1,10 @@
 .remove-btn {
   margin-right: 0.5rem;
+  float: left;
+}
+
+.remove-btn:hover {
+  color: red;
 }
 
 .fade-enter {
