@@ -18,7 +18,8 @@ router.get('/', (req, res) => {
 // @access Public
 router.post('/', (req, res) => {
   const newGoal = new Goal({
-    title: req.body.title
+    title: req.body.title,
+    description: req.body.description
   });
 
   newGoal.save().then(goal => res.json(goal));

@@ -17,21 +17,24 @@ class GoalList extends Component {
     const { goals } = this.props.goal;
     return (
       <Container>
-        <TransitionGroup className="goal-list">
-          <Row>
-            {goals.map(({ _id, title }) => (
+        <Row>
+        {/* <TransitionGroup className="goal-list"> */}
+          
+            {goals.map(({ _id, title, description }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <Col sm="4">
                   <CardComponent 
                     title={title}
                     id={_id}
+                    description={description}
                   />
                   <br/>
                 </Col>
               </CSSTransition>
             ))}
-          </Row>
-        </TransitionGroup>
+          
+        {/* </TransitionGroup> */}
+        </Row>
       </Container>
     );
   }

@@ -7,7 +7,11 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addGoal } from '../actions/goalActions';
@@ -15,7 +19,10 @@ import { addGoal } from '../actions/goalActions';
 class GoalModal extends Component {
   state = {
     modal: false,
-    title: ''
+    title: '',
+    description: '',
+    category: '',
+    dropDownOpen: false
   }
 
   toggle = () => {
@@ -24,15 +31,24 @@ class GoalModal extends Component {
     });
   }
 
+  toggleDropDown = () => {
+    this.setState({
+      dropDownOpen: !this.state.dropDownOpen
+    });
+  }
+
   onChange = e => {
-    this.setState({ [e.target.title]: e.target.value });
+    this.setState({ 
+      [e.target.title ]: e.target.value
+    });
   }
 
   onSubmit = e => {
     e.preventDefault();
 
     const newGoal = {
-      title: this.state.title
+      title: this.state.title,
+      description: this.state.description
     }
 
     // Add goal via addGoal action
@@ -69,6 +85,23 @@ class GoalModal extends Component {
                   placeholder="Add Goal"
                   onChange={this.onChange}
                 />
+                <Input
+                  type="text"
+                  title="description"
+                  id="goal"
+                  placeholder="Description"
+                  onChange={this.onChange}
+                />
+                <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggleDropDown}>
+                  <DropdownToggle>
+                    Categories
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>Strength</DropdownItem>
+                    <DropdownItem>Conditioning</DropdownItem>
+                    <DropdownItem>Habit</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
                 <Button
                   color="dark"
                   style={{marginTop: '2rem'}}
