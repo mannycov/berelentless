@@ -17,14 +17,29 @@ class CardComponent extends Component {
   }
   
   render() {
-    const { id, title, description } = this.props;
+    const { 
+      id,
+      title,
+      description,
+      category
+    } = this.props;
+    let img;
+
+    if (category === 'Strength') {
+      img = 'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/dumbbell.png';
+    } else if (category === 'Conditioning') {
+      img = 'https://cdn2.iconfinder.com/data/icons/sports-recreation/128/running-woman-512.png';
+    } else if (category === 'Habit') {
+      img = 'https://png.icons8.com/metro/1600/checkmark.png';
+    }
     return (
       <div>
         <Card>
-          <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+          <CardImg top width="100%" src={img} alt="Card image cap" />
           <CardBody>
             <CardTitle>{title}</CardTitle>
             <CardText>{description}</CardText>
+            <CardText>{category}</CardText>
             <Button close
               className="remove-btn"
               size="small"

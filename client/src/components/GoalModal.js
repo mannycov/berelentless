@@ -7,11 +7,7 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle
+  Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addGoal } from '../actions/goalActions';
@@ -21,25 +17,25 @@ class GoalModal extends Component {
     modal: false,
     title: '',
     description: '',
-    category: '',
-    dropDownOpen: false
+    category: 'Strength',
+    weightTarget: '',
+    repTarget: '',
+    minutes: '',
+    seconds: '',
+    days: '',
+    img: ''
   }
 
   toggle = () => {
     this.setState({
-      modal: !this.state.modal
-    });
-  }
-
-  toggleDropDown = () => {
-    this.setState({
-      dropDownOpen: !this.state.dropDownOpen
+      modal: !this.state.modal,
+      category: ''
     });
   }
 
   onChange = e => {
     this.setState({ 
-      [e.target.title ]: e.target.value
+      [e.target.title]: e.target.value
     });
   }
 
@@ -48,7 +44,8 @@ class GoalModal extends Component {
 
     const newGoal = {
       title: this.state.title,
-      description: this.state.description
+      description: this.state.description,
+      category: this.state.category
     }
 
     // Add goal via addGoal action
@@ -59,6 +56,58 @@ class GoalModal extends Component {
   }
 
   render() {
+    const category = this.state.category;
+    let target;
+
+    if (category === 'Strength') {
+      target = 
+      <div>
+        <Input
+          type="text"
+          title="weightTarget"
+          id="goal"
+          placeholder="Weight Target"
+          onChange={this.onChange}
+        />
+        <Input
+          type="text"
+          title="repTarget"
+          id="goal"
+          placeholder="Rep Target"
+          onChange={this.onChange}
+        />
+      </div>
+    } else if (category === 'Conditioning') {
+      target = 
+      <div>
+        <Input
+          type="text"
+          title="minutes"
+          id="goal"
+          placeholder="Minutes"
+          onChange={this.onChange}
+        />
+        <Input
+          type="text"
+          title="seconds"
+          id="goal"
+          placeholder="Seconds"
+          onChange={this.onChange}
+        />
+      </div>
+    } else if (category === 'Habit') {
+      target =
+      <div>
+        <Input
+          type="text"
+          title="days"
+          id="goal"
+          placeholder="Days"
+          onChange={this.onChange}
+        />
+      </div>
+    }
+
     return (
       <div>
         <Button
@@ -78,6 +127,7 @@ class GoalModal extends Component {
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="goal">Goal</Label>
+                {/* Title */}
                 <Input
                   type="text"
                   title="title"
@@ -85,6 +135,7 @@ class GoalModal extends Component {
                   placeholder="Add Goal"
                   onChange={this.onChange}
                 />
+                {/* Description */}
                 <Input
                   type="text"
                   title="description"
@@ -92,16 +143,24 @@ class GoalModal extends Component {
                   placeholder="Description"
                   onChange={this.onChange}
                 />
-                <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggleDropDown}>
-                  <DropdownToggle>
-                    Categories
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>Strength</DropdownItem>
-                    <DropdownItem>Conditioning</DropdownItem>
-                    <DropdownItem>Habit</DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
+                {/* Category */}
+                <FormGroup>
+                  <Label for="categories">Categories</Label>
+                  <Input 
+                    type="select"
+                    title="category"
+                    id="category"
+                    placeholder="Categories"
+                    onChange={this.onChange}
+                  >
+                    <option>Select a Category</option>
+                    <option>Strength</option>
+                    <option>Conditioning</option>
+                    <option>Habit</option>
+                  </Input>
+                </FormGroup>
+                {/* Goal Targets */}
+                {target}
                 <Button
                   color="dark"
                   style={{marginTop: '2rem'}}

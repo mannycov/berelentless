@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const newGoal = new Goal({
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
+    category: req.body.category
   });
 
   newGoal.save().then(goal => res.json(goal));

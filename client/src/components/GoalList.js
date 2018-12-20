@@ -20,13 +20,14 @@ class GoalList extends Component {
         <Row>
         {/* <TransitionGroup className="goal-list"> */}
           
-            {goals.map(({ _id, title, description }) => (
+            {goals.map(({ _id, title, description, category }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <Col sm="4">
                   <CardComponent 
                     title={title}
                     id={_id}
                     description={description}
+                    category={category}
                   />
                   <br/>
                 </Col>
