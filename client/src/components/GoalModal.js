@@ -11,13 +11,14 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addGoal } from '../actions/goalActions';
+import CategoryTargets from './CategoryTargets';
 
 class GoalModal extends Component {
   state = {
     modal: false,
     title: '',
     description: '',
-    category: 'Strength',
+    category: '',
     weightTarget: '',
     repTarget: '',
     minutes: '',
@@ -45,7 +46,12 @@ class GoalModal extends Component {
     const newGoal = {
       title: this.state.title,
       description: this.state.description,
-      category: this.state.category
+      category: this.state.category,
+      weightTarget: this.state.weightTarget,
+      repTarget: this.state.repTarget,
+      minutes: this.state.minutes,
+      seconds: this.state.seconds,
+      days: this.state.days
     }
 
     // Add goal via addGoal action
@@ -57,56 +63,7 @@ class GoalModal extends Component {
 
   render() {
     const category = this.state.category;
-    let target;
-
-    if (category === 'Strength') {
-      target = 
-      <div>
-        <Input
-          type="text"
-          title="weightTarget"
-          id="goal"
-          placeholder="Weight Target"
-          onChange={this.onChange}
-        />
-        <Input
-          type="text"
-          title="repTarget"
-          id="goal"
-          placeholder="Rep Target"
-          onChange={this.onChange}
-        />
-      </div>
-    } else if (category === 'Conditioning') {
-      target = 
-      <div>
-        <Input
-          type="text"
-          title="minutes"
-          id="goal"
-          placeholder="Minutes"
-          onChange={this.onChange}
-        />
-        <Input
-          type="text"
-          title="seconds"
-          id="goal"
-          placeholder="Seconds"
-          onChange={this.onChange}
-        />
-      </div>
-    } else if (category === 'Habit') {
-      target =
-      <div>
-        <Input
-          type="text"
-          title="days"
-          id="goal"
-          placeholder="Days"
-          onChange={this.onChange}
-        />
-      </div>
-    }
+    const onChange = this.onChange;
 
     return (
       <div>
@@ -132,7 +89,7 @@ class GoalModal extends Component {
                   type="text"
                   title="title"
                   id="goal"
-                  placeholder="Add Goal"
+                  placeholder="Title"
                   onChange={this.onChange}
                 />
                 {/* Description */}
@@ -160,7 +117,10 @@ class GoalModal extends Component {
                   </Input>
                 </FormGroup>
                 {/* Goal Targets */}
-                {target}
+                <CategoryTargets
+                  category={category}
+                  onChange={onChange}
+                />
                 <Button
                   color="dark"
                   style={{marginTop: '2rem'}}

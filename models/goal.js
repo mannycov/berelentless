@@ -8,12 +8,26 @@ const GoalSchema = new Schema({
     required: true
   },
   description: {
-    type: String,
-    required: true
+    type: String
   },
   category: {
     type: String,
     required: true
+  },
+  weightTarget: {
+    type: String
+  },
+  repTarget: {
+    type: String
+  },
+  minutes: {
+    type: String
+  },
+  seconds: {
+    type: String
+  },
+  days: {
+    type: String
   },
   date: {
     type: Date,

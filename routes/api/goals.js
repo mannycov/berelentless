@@ -20,7 +20,12 @@ router.post('/', (req, res) => {
   const newGoal = new Goal({
     title: req.body.title,
     description: req.body.description,
-    category: req.body.category
+    category: req.body.category,
+    weightTarget: req.body.weightTarget,
+    repTarget: req.body.repTarget,
+    minutes: req.body.minutes,
+    seconds: req.body.seconds,
+    days: req.body.days
   });
 
   newGoal.save().then(goal => res.json(goal));
