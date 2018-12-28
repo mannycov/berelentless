@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { getGoals, deleteGoal } from '../actions/goalActions';
 import PropTypes from 'prop-types';
 
@@ -53,4 +54,4 @@ const mapStateToProps = (state) => ({
   goal: state.goal
 });
 
-export default connect(mapStateToProps, { getGoals, deleteGoal })(GoalList);
+export default withRouter(connect(mapStateToProps, { getGoals, deleteGoal })(GoalList));

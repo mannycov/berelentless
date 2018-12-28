@@ -1,6 +1,7 @@
 .remove-btn {
   margin-right: 0.5rem;
   float: left;
+  color: red;
 }
 
 .remove-btn:hover {

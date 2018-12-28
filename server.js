@@ -4,10 +4,15 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const goals = require('./routes/api/goals');
+const checkins = require('./routes/api/checkins');
+const profile = require('./routes/api/profile');
+const users = require('./routes/api/users');
+const passport = require('passport');
 
 const app = express();
 
 // Body Parser Middleware
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // MongoDB Config
@@ -19,8 +24,18 @@ mongoose
   .then(() => console.log('MongoDB Connected...'))
   .catch((err => console.log(err)));
 
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
+
 // Use Routes
 app.use('/api/goals', goals);
+app.use('/api/checkins', checkins);
+app.use('/api/profile', profile);
+app.use('/api/users', users);
+
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
