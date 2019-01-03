@@ -6,6 +6,7 @@ module.exports = function validateRegisterInput(data) {
 
   data.name = !isEmpty(data.name) ? data.name : '';
   data.email = !isEmpty(data.email) ? data.email : '';
+  data.handle = !isEmpty(data.handle) ? data.handle: '';
   data.password = !isEmpty(data.password) ? data.password : '';
   data.password2 = !isEmpty(data.password2) ? data.password2 : '';
 
@@ -23,6 +24,10 @@ module.exports = function validateRegisterInput(data) {
 
   if (!Validator.isEmail(data.email)) {
     errors.email = 'Email is invalid';
+  }
+
+  if (Validator.isEmpty(data.handle)) {
+    errors.handle = 'The Handle is required';
   }
 
   if (Validator.isEmpty(data.password)) {

@@ -29,6 +29,17 @@ const GoalSchema = new Schema({
   days: {
     type: String
   },
+  from: {
+    type: Date,
+    required: true
+  },
+  to: {
+    type: Date
+  },
+  current: {
+    type: Boolean,
+    default: false
+  },
   date: {
     type: Date,
     default: Date.now
