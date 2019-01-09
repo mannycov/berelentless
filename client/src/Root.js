@@ -10,7 +10,7 @@ const Root = ({ store }) => (
     <Router>
       <Switch>
         <Route path="/" component={App} />
-        <Route path="/api/goal/:id" component={CheckIn} />
+        <Route exact path="/api/goal/:id" component={CheckIn} />
       </Switch>
     </Router>
   </Provider>
