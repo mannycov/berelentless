@@ -157,4 +157,30 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
     .catch(err => res.statu(404).json({ goalnotfound: 'No goal found' }));
 });
 
+// @route DELETE api/goals/comment/:id/:comment_id
+// @desc  Delete a comment from goal
+// @access Private
+router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Goal.findById(req.params.id)
+    .then(goal => {
+      // Check to see if comment exists
+      if (goal.comments.filter(comment => comment._id.toString() === req.params.comment_id).length === 0) {
+        return res.status(404).json({ commentnotexists: 'Comment does not exist '})
+      }
+
+      // Get remove index
+      const removeIndex = goal.comments
+        .map(item => item._id.toString())
+        .indexOf(req.params.comment_id);
+
+      // Splice comment out of array
+      goal.comments.splice(removeIndex, 1);
+
+      // Svae
+      goal.save().then(goal => res.json(goal));
+    })
+    .catch(err => res.status(404).json({ goalnotfound: 'No goal found' }));
+});
+
+
 module.exports = router;
