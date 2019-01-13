@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getGoals, deleteGoal } from '../actions/goalActions';
@@ -19,26 +18,22 @@ class GoalList extends Component {
     return (
       <Container>
         <Row>
-          {/* <TransitionGroup className="goal-list"> */}
-            {goals.map(({ _id, title, description, category, weightTarget, repTarget, minutes, seconds, days }) => (
-              <CSSTransition key={_id} timeout={500} classNames="fade">
-                <Col sm="4" >    
-                  <CardComponent 
-                    id={_id} 
-                    title={title}
-                    description={description}
-                    category={category}
-                    weightTarget={weightTarget}
-                    repTarget={repTarget}
-                    minutes={minutes}
-                    seconds={seconds}
-                    days={days}
-                  />
-                  <br/>
-                </Col>
-              </CSSTransition>
-            ))}
-          {/* </TransitionGroup> */}
+          {goals.map(({ _id, title, description, category, weightTarget, repTarget, minutes, seconds, days }) => (
+            <Col sm="4" >    
+              <CardComponent 
+                id={_id} 
+                title={title}
+                description={description}
+                category={category}
+                weightTarget={weightTarget}
+                repTarget={repTarget}
+                minutes={minutes}
+                seconds={seconds}
+                days={days}
+              />
+              <br/>
+            </Col>
+          ))}
         </Row>
       </Container>
     );
