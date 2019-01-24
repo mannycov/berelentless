@@ -178,8 +178,7 @@ class EditProfile extends Component {
                     this.setState(prevState => ({
                       displaySocialInputs: !prevState.displaySocialInputs
                     }));
-                  }} className="btn btn-light">Add Social Media Links</button>
-                  <span className="text-muted"> - Optional</span>
+                  }} className="btn btn-light">Edit Social Media Links</button>
                 </div>
                 {socialInputs}
                 <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
