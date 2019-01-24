@@ -10,7 +10,7 @@ import {
   Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addGoal } from '../actions/goalActions';
+import { addGoal } from '../../actions/goalActions';
 import CategoryTargets from './CategoryTargets';
 
 class GoalModal extends Component {

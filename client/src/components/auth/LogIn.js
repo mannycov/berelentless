@@ -63,7 +63,6 @@ class LogIn extends Component {
                   onChange={this.onChange}
                   error={errors.email}
                 />
-
                 <TextFieldGroup
                   placeholder="Password"
                   name="password"
@@ -72,7 +71,6 @@ class LogIn extends Component {
                   onChange={this.onChange}
                   error={errors.password}
                 />
-  
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getGoals, deleteGoal } from '../actions/goalActions';
+import { getGoals, deleteGoal } from '../../actions/goalActions';
 import PropTypes from 'prop-types';
 
 import CardComponent from './CardComponent';
