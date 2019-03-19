@@ -20,10 +20,9 @@ import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
-
+import NotFound from './components/not-found/NotFound';
 
 import './App.css';
-
 // Check for token
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -67,6 +66,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/edit-profile" component={ EditProfile } />
               </Switch>
+              <Route exact path="/not-found" component={ NotFound } />
             </div>
             <Footer />
           </div>

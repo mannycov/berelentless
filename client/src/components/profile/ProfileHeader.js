@@ -17,7 +17,7 @@ class ProfileHeader extends Component {
             </div>
             <div className="text-center">
               <h1 className="display-4 text-center">{profile.user.name}</h1>
-              {isEmpty(profile.user.location) ? null : (<p>{profile.user.location}</p>)}
+              {isEmpty(profile.location) ? null : (<h5>{profile.location}</h5>)}
               <p>
                 {isEmpty(profile.social && profile.social.youtube) ? null : (
                   <a className="text-white p-2" href={`https://${profile.social.youtube}`} rel="noopener noreferrer" target="_blank">
