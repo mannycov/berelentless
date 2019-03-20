@@ -2,6 +2,7 @@ import { GET_GOALS, ADD_GOAL, DELETE_GOAL, GOALS_LOADING } from '../actions/type
 
 const initialState = {
   goals: [],
+  goal: {},
   loading: false
 }
 
