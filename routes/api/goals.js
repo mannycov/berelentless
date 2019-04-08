@@ -52,7 +52,9 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     minutes: req.body.minutes,
     seconds: req.body.seconds,
     days: req.body.days,
-    user: req.user.id
+    user: req.user.id,
+    name: req.body.name,
+    avatar: req.body.avatar
   });
 
   newGoal.save().then(goal => res.json(goal));

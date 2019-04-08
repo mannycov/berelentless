@@ -13,8 +13,8 @@ export const getGoals = () => dispatch => {
     )
     .catch(err => 
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
+        type: GET_GOALS,
+        payload: null
       })
     ); 
 };
@@ -54,6 +54,7 @@ export const deleteGoal = id => dispatch => {
     ); 
 };
 
+// Set Loading State
 export const setGoalsLoading = () => {
   return {
     type: GOALS_LOADING

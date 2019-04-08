@@ -18,17 +18,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         goals: state.goals.filter(goal => goal._id !== action.payload)
-      }
+      };
     case ADD_GOAL:
       return {
         ...state,
         goals: [action.payload, ...state.goals]
-      }
+      };
     case GOALS_LOADING:
       return {
         ...state,
         loading: true
-      }
+      };
     default:
       return state;
   }

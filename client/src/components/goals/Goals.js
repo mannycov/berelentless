@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoalForm from './GoalForm';
 import Spinner from '../common/Spinner';
+import { getGoals } from '../../actions/goalActions';
 
 class Goals extends Component {
+
+  componentDidMount() {
+    this.props.getGoals();
+  }
+
   render() {
     return (
       <div className="feed">
@@ -20,4 +26,13 @@ class Goals extends Component {
   }
 }
 
-export default Goals;
+Goals.propTypes = {
+  getGoals: PropTypes.func.isRequired,
+  goal: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  goal: state.goal
+});
+
+export default connect(mapStateToProps, { getGoals })(Goals);

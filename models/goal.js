@@ -43,6 +43,12 @@ const GoalSchema = new Schema({
     type: Boolean,
     default: false
   },
+  name: {
+    type: String
+  },
+  avatar: {
+    type: String
+  },
   likes: [
     {
       user: {
