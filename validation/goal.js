@@ -14,9 +14,9 @@ module.exports = function validateGoalInput(data) {
     errors.title = 'Title field is required';
   }
 
-  if (Validator.isEmpty(data.category)) {
-    errors.category = 'Category field is required';
-  }
+  // if (Validator.isEmpty(data.category)) {
+  //   errors.category = 'Category field is required';
+  // }
 
   return {
     errors, 

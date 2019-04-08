@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getGoals, deleteGoal } from '../../actions/goalActions';
+import 
 import PropTypes from 'prop-types';
 
 import CardComponent from './CardComponent';

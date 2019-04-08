@@ -78,7 +78,7 @@ class GoalModal extends Component {
           toggle={this.toggle}
         >
           <ModalHeader toggle={this.toggle}>
-            Add a Goal to Your List
+            Add a Goal to Your Goal List
           </ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>

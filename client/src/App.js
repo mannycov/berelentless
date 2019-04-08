@@ -20,6 +20,7 @@ import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
+import Goals from './components/goals/Goals';
 import NotFound from './components/not-found/NotFound';
 
 import './App.css';
@@ -65,6 +66,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/edit-profile" component={ EditProfile } />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={ Goals } />
               </Switch>
               <Route exact path="/not-found" component={ NotFound } />
             </div>
