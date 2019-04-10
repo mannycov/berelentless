@@ -103,7 +103,7 @@ router.post('/like/:id', passport.authenticate('jwt', { session: false }), (req,
 });
 
 // @route   POST api/goals/unlike/:id
-// @desc    Like a Goal
+// @desc    Unlike a Goal
 // @access  Private
 router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   Profile.findOne({ user: req.user.id })

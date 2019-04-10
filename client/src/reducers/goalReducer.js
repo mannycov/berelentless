@@ -1,4 +1,4 @@
-import { GET_GOALS, ADD_GOAL, DELETE_GOAL, GOALS_LOADING } from '../actions/types';
+import { GET_GOALS, GET_GOAL, ADD_GOAL, DELETE_GOAL, GOALS_LOADING } from '../actions/types';
 
 const initialState = {
   goals: [],
@@ -12,6 +12,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         goals: action.payload,
+        loading: false
+      };
+    case GET_GOAL:
+      return {
+        ...state,
+        goal: action.payload,
         loading: false
       };
     case DELETE_GOAL:
