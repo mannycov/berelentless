@@ -36,7 +36,6 @@ app.use('/api/checkins', checkins);
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 
-
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set a static foler
