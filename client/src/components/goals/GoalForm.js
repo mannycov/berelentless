@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+import SelectListGroup from '../common/SelectListGroup';
 import { addGoal } from '../../actions/goalActions';
 
 class GoalForm extends Component {
 
   state = {
     title: '',
+    category: '',
+    weightTarget: '',
+    repTarget: '',
+    minutes: '',
+    seconds: '',
+    days: '',
+    description: '',
+    options: [
+      {label: 'Select a Category'},
+      {label: 'Strength', value: 'Strength'},
+      {label: 'Conditioning', value: 'Conditioning'},
+      {label: 'Habit', value: 'Habit'}
+    ],
     errors: {}
   }
 
@@ -28,32 +43,124 @@ class GoalForm extends Component {
 
     const newGoal = {
       title: this.state.title,
+      category: this.state.category,
+      weightTarget: this.state.weightTarget,
+      repTarget: this.state.repTarget,
+      minutes: this.state.minutes,
+      seconds: this.state.seconds,
+      days: this.state.days,
+      description: this.state.description,
       name: user.name,
       avatar: user.avatar
     };
 
     this.props.addGoal(newGoal);
-    this.setState({ title: '' });
+    this.setState({
+      title: '',
+      category: '',
+      description: '',
+      weightTarget: '',
+      repTarget: '',
+      minutes: '',
+      seconds: '',
+      days: ''
+    });
   }
 
   render() {
-    const { errors, title } = this.state;
+    const {
+      errors,
+      title,
+      category,
+      weightTarget,
+      repTarget,
+      minutes,
+      seconds,
+      days,
+      description,
+      options
+    } = this.state;
+
+    let categoryTargets;
+
+    if (category === 'Strength') {
+      categoryTargets = 
+        <div>
+          <TextFieldGroup 
+            placeholder="Enter a weight target"
+            name="weightTarget"
+            value={weightTarget}
+            onChange={this.onChange}
+            error={errors.weightTarget}
+          />
+          <TextFieldGroup 
+            placeholder="Enter a rep target"
+            name="repTarget"
+            value={repTarget}
+            onChange={this.onChange}
+            error={errors.repTarget}
+          />
+        </div>
+    } else if (category === 'Conditioning') {
+      categoryTargets =
+        <div>
+          <TextFieldGroup 
+            placeholder="Enter a minutes target"
+            name="minutes"
+            value={minutes}
+            onChange={this.onChange}
+            error={errors.minutes}
+          />
+          <TextFieldGroup 
+            placeholder="Enter a seconds target"
+            name="seconds"
+            value={seconds}
+            onChange={this.onChange}
+            error={errors.seconds}
+          />
+        </div>
+    } else if (category === 'Habit') {
+      categoryTargets = 
+        <TextFieldGroup 
+          placeholder="Enter the number of days"
+          name="days"
+          value={days}
+          onChange={this.onChange}
+          error={errors.days}
+        />
+    }
+
     return (
       <div className="goal-form mb-3">
         <div className="card card-info">
           <div className="card-header bg-info text-white">
-            Add Your Goal
+            Add a Goal
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-               <TextAreaFieldGroup 
-                placeholder="Create a goal"
-                name="title"
-                value={title}
-                onChange={this.onChange}
-                error={errors.title}
+               <TextFieldGroup 
+                  placeholder="Name your goal"
+                  name="title"
+                  value={title}
+                  onChange={this.onChange}
+                  error={errors.title}
                />
+               <SelectListGroup
+                  placeholder="Choose a category"
+                  name="category"
+                  value={category}
+                  options={options}
+                  onChange={this.onChange}
+                  error={errors.category}
+                />
+                {categoryTargets}
+                <TextAreaFieldGroup
+                  placeholder="Write a description..."
+                  name="description"
+                  value={description}
+                  onChange={this.onChange}
+                />
               </div>
               <button type="submit" className="btn btn-dark">Submit</button>
             </form>

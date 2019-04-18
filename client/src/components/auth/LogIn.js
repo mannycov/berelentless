@@ -45,7 +45,7 @@ class LogIn extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors, email, password } = this.state;
 
     return (
       <div className="login">
@@ -59,7 +59,7 @@ class LogIn extends Component {
                   placeholder="Email Address"
                   name="email"
                   type="email"
-                  value={this.state.email}
+                  value={email}
                   onChange={this.onChange}
                   error={errors.email}
                 />
@@ -67,7 +67,7 @@ class LogIn extends Component {
                   placeholder="Password"
                   name="password"
                   type="password"
-                  value={this.state.password}
+                  value={password}
                   onChange={this.onChange}
                   error={errors.password}
                 />

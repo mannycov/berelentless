@@ -31,6 +31,26 @@ class GoalItem extends Component {
   
   render() {
     const { goal, auth, showActions } = this.props;
+    let goalMetrics;
+
+    if (goal.category === 'Strength') {
+      goalMetrics = (
+        <div>
+          {goal.weightTarget ? <p className="lead">Weight Target - {goal.weightTarget}</p> : null}
+          {goal.repTarget ? <p className="lead">Rep Target - {goal.repTarget}</p> : null}
+        </div>
+      );
+    } else if (goal.category === 'Conditioning') {
+      goalMetrics = (
+        <div>
+          {goal.minutes ? <p className="lead">Minutes - {goal.minutes}</p> : null}
+          {goal.seconds ? <p className="lead">Seconds - {goal.seconds}</p> : null}
+        </div>
+      );
+    } else if (goal.category === 'Habit') {
+      goalMetrics = goal.days ? <p className="lead">Days - {goal.days}</p> : null
+    }
+
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -47,6 +67,8 @@ class GoalItem extends Component {
           </div>
           <div className="col-md-10">
             <p className="lead">{goal.title}</p>
+            <p className="lead">{goal.category}</p>
+            {goalMetrics}
             {showActions ? (<span>
               <button onClick={() => this.onLikeClick(goal._id)} type="button" className="btn btn-light mr-1">
               <i className={classnames('fas fa-thumbs-up', {

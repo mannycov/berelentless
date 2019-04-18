@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import GoalForm from './GoalForm';
 import GoalFeed from './GoalFeed';
 import Spinner from '../common/Spinner';
 import { getGoals } from '../../actions/goalActions';
@@ -26,7 +25,6 @@ class Goals extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <GoalForm />
               {goalContent}
             </div>
           </div>

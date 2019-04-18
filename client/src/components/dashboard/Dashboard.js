@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getGoals } from '../../actions/goalActions';
 import Spinner from '../common/Spinner';
+import GoalForm from '../goals/GoalForm';
+import GoalItem from '../goals/GoalItem';
 import ProfileActions from './ProfileActions';
 
 class Dashboard extends Component {
 
   componentDidMount() {
     this.props.getCurrentProfile();
+    this.props.getGoals();
   }
 
   onDeleteClick = () => {
@@ -19,6 +23,7 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
+    const { goals } = this.props.goal;
 
     let dashboardContent;
 
@@ -33,7 +38,10 @@ class Dashboard extends Component {
               Welcome <Link to={`/profile/${profile.handle}`}>{ user.name }</Link>
             </p>
             <ProfileActions />
-            <div style={{ marginBottom: '60px' }} />
+            <GoalForm />
+            <h1 className="display-4">My Goals</h1>
+              {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
+            <div style={{ marginBottom: '30px' }} />
             <button onClick={this.onDeleteClick} className="btn btn-danger">Delete My Account</button>
           </div>
         );
@@ -67,14 +75,17 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  getGoals: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
+  goal: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
+  goal: state.goal
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount, getGoals })(Dashboard);
