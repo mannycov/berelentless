@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const goals = require('./routes/api/goals');
-const checkins = require('./routes/api/checkins');
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const passport = require('passport');
@@ -32,7 +31,6 @@ require('./config/passport')(passport);
 
 // Use Routes
 app.use('/api/goals', goals);
-app.use('/api/checkins', checkins);
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 

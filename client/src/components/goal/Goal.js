@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import GoalItem from '../goals/GoalItem';
+import CheckInForm from '../checkins/CheckInForm';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
 import Spinner from '../common/Spinner';
@@ -15,18 +16,26 @@ class Goal extends Component {
   }
 
   render() {
+    const { auth } = this.props;
     const { goal, loading } = this.props.goal;
     let goalContent;
 
     if (goal === null|| loading || Object.keys(goal).length === 0) {
       goalContent = <Spinner />
-    } else {
+    } else if (goal.user === auth.user.id) {
       goalContent = (
         <div>
-          <GoalItem
-            goal={goal}
-            showActions={false}
-          />
+          <GoalItem goal={goal} showActions={false} />
+          <CheckInForm goalId={goal._id} />
+          <CommentForm goalId={goal._id} />
+          <CommentFeed goalId={goal._id} comments={goal.comments} />
+        </div>
+      )
+    }
+     else {
+      goalContent = (
+        <div>
+          <GoalItem goal={goal} showActions={false} />
           <CommentForm goalId={goal._id} />
           <CommentFeed goalId={goal._id} comments={goal.comments} />
         </div>
@@ -52,11 +61,13 @@ class Goal extends Component {
 
 Goal.propTypes = {
   getGoal: PropTypes.func.isRequired,
-  goal: PropTypes.object.isRequired
+  goal: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  goal: state.goal
+  goal: state.goal,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getGoal })(Goal);

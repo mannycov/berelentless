@@ -85,6 +85,43 @@ export const addComment = (goalId, comment) => dispatch => {
     ); 
 };
 
+// Add Check-In
+export const addCheckIn = (goalId, checkIn) => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post(`/api/goals/checkin/${goalId}`, checkIn)
+    .then(res => 
+      dispatch({
+        type: GET_GOAL,
+        payload: res.data
+      })
+    )
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    ); 
+};
+
+// Delete Check-In
+export const deleteCheckIn = (goalId, checkInId) => dispatch => {
+  axios
+    .delete(`/api/goals/comment/${goalId}/${checkInId}`)
+    .then(res => 
+      dispatch({
+        type: GET_GOAL,
+        payload: res.data
+      })
+    )
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    ); 
+};
+
 // Delete Comment
 export const deleteComment = (goalId, commentId) => dispatch => {
   axios

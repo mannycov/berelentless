@@ -156,7 +156,56 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
       // Save
       goal.save().then(goal => res.json(goal));
     })
-    .catch(err => res.statu(404).json({ goalnotfound: 'No goal found' }));
+    .catch(err => res.status(404).json({ goalnotfound: 'No goal found' }));
+});
+
+// @route POST api/goals/comment/:id
+// @desc  Add comment to goal
+// @access Private
+router.post('/checkin/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Goal.findById(req.params.id)
+    .then(goal => {
+      const newCheckIn = {
+        weight: req.body.weight,
+        reps: req.body.reps,
+        minutes: req.body.minutes,
+        seconds: req.body.seconds,
+        checkin: req.body.checkin,
+        user: req.user.id
+      }
+
+      // Add to check-ins array
+      goal.checkins.unshift(newCheckIn);
+
+      // Save
+      goal.save().then(goal => res.json(goal));
+    })
+    .catch(err => res.status(404).json({ goalnotfound: 'No goal found' }));
+});
+
+// @route DELETE api/goals/checkin/:id/:checkin_id
+// @desc  Delete a checkin from goal
+// @access Private
+router.delete('/checkin/:id/:checkin_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Goal.findById(req.params.id)
+    .then(goal => {
+      // Check to see if comment exists
+      if (goal.checkins.filter(checkin => checkin._id.toString() === req.params.checkin_id).length === 0) {
+        return res.status(404).json({ checkindoesnotexists: 'Check-in does not exist '})
+      }
+
+      // Get remove index
+      const removeIndex = goal.checkins
+        .map(item => item._id.toString())
+        .indexOf(req.params.checkin_id);
+
+      // Splice checkin out of array
+      goal.checkins.splice(removeIndex, 1);
+
+      // Svae
+      goal.save().then(goal => res.json(goal));
+    })
+    .catch(err => res.status(404).json({ goalnotfound: 'No goal found' }));
 });
 
 // @route DELETE api/goals/comment/:id/:comment_id

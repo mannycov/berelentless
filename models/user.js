@@ -22,7 +22,7 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  goals: [{ type: Schema.Types.ObjectId, ref: 'goal' }]
+  goals: [{ type: Schema.Types.ObjectId, ref: 'Goal' }]
 });
 
-module.exports = User = mongoose.model('user', UserSchema);
+module.exports = User = mongoose.model('User', UserSchema);

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const GoalSchema = new Schema({
   user: { 
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'User'
   },
   title: {
     type: String,
@@ -53,7 +53,30 @@ const GoalSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'User'
+      }
+    }
+  ],
+  checkins: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      weight: {
+        type: String
+      },
+      reps: {
+        type: String
+      },
+      minutes: {
+        type: String
+      },
+      seconds: {
+        type: String
+      },
+      checkin: {
+        type: Boolean
       }
     }
   ],
@@ -61,7 +84,7 @@ const GoalSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'User'
       },
       text: {
         type: String,
@@ -85,4 +108,4 @@ const GoalSchema = new Schema({
   }
 });
 
-module.exports = Goal = mongoose.model('goal', GoalSchema);
+module.exports = Goal = mongoose.model('Goal', GoalSchema);

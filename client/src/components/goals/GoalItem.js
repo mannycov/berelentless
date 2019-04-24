@@ -69,7 +69,10 @@ class GoalItem extends Component {
             <p className="lead">{goal.title}</p>
             <p className="lead">{goal.category}</p>
             {goalMetrics}
-            {showActions ? (<span>
+
+            {showActions ?
+              (
+              <span>
               <button onClick={() => this.onLikeClick(goal._id)} type="button" className="btn btn-light mr-1">
               <i className={classnames('fas fa-thumbs-up', {
                 'text-info': this.findUserLike(goal.likes)
@@ -87,7 +90,9 @@ class GoalItem extends Component {
                 <i className="fas fa-times" />
               </button>
             ) : null}
-            </span>) : null}
+            </span>
+            ) : null}
+
           </div>
         </div>
       </div>
