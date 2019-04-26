@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import GoalItem from '../goals/GoalItem';
-import CheckInForm from '../checkins/CheckInForm';
+import CheckInForm from './CheckInForm';
+import CheckInContent from './CheckInContent';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
 import Spinner from '../common/Spinner';
@@ -18,6 +19,7 @@ class Goal extends Component {
   render() {
     const { auth } = this.props;
     const { goal, loading } = this.props.goal;
+    const checkins = goal.checkins;
     let goalContent;
 
     if (goal === null|| loading || Object.keys(goal).length === 0) {
@@ -26,6 +28,7 @@ class Goal extends Component {
       goalContent = (
         <div>
           <GoalItem goal={goal} showActions={false} />
+          <CheckInContent goal={goal} checkins={checkins} />
           <CheckInForm goalId={goal._id} />
           <CommentForm goalId={goal._id} />
           <CommentFeed goalId={goal._id} comments={goal.comments} />
@@ -36,6 +39,7 @@ class Goal extends Component {
       goalContent = (
         <div>
           <GoalItem goal={goal} showActions={false} />
+          <CheckInContent goalId={goal._id} checkins={checkins} />
           <CommentForm goalId={goal._id} />
           <CommentFeed goalId={goal._id} comments={goal.comments} />
         </div>

@@ -17,12 +17,6 @@ class GoalForm extends Component {
     seconds: '',
     days: '',
     description: '',
-    options: [
-      {label: 'Select a Category'},
-      {label: 'Strength', value: 'Strength'},
-      {label: 'Conditioning', value: 'Conditioning'},
-      {label: 'Habit', value: 'Habit'}
-    ],
     errors: {}
   }
 
@@ -77,8 +71,7 @@ class GoalForm extends Component {
       minutes,
       seconds,
       days,
-      description,
-      options
+      description
     } = this.state;
 
     let categoryTargets;
@@ -129,6 +122,13 @@ class GoalForm extends Component {
           error={errors.days}
         />
     }
+
+    const options = [
+      { label: '* Select a Category', value: 0 },
+      { label: 'Strength', value: 'Strength' },
+      { label: 'Conditioning', value: 'Conditioning' },
+      { label: 'Habit', value: 'Habit' }
+    ];
 
     return (
       <div className="goal-form mb-3">
