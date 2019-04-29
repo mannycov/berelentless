@@ -16,6 +16,8 @@ class GoalForm extends Component {
     minutes: '',
     seconds: '',
     days: '',
+    from: '',
+    to: '',
     description: '',
     errors: {}
   }
@@ -43,6 +45,8 @@ class GoalForm extends Component {
       minutes: this.state.minutes,
       seconds: this.state.seconds,
       days: this.state.days,
+      from: this.state.from,
+      to: this.state.to,
       description: this.state.description,
       name: user.name,
       avatar: user.avatar
@@ -57,7 +61,9 @@ class GoalForm extends Component {
       repTarget: '',
       minutes: '',
       seconds: '',
-      days: ''
+      days: '',
+      from: '',
+      to: ''
     });
   }
 
@@ -71,6 +77,8 @@ class GoalForm extends Component {
       minutes,
       seconds,
       days,
+      from,
+      to,
       description
     } = this.state;
 
@@ -155,6 +163,20 @@ class GoalForm extends Component {
                   error={errors.category}
                 />
                 {categoryTargets}
+                <TextFieldGroup
+                  name="from"
+                  type="date"
+                  value={from}
+                  onChange={this.onChange}
+                  error={errors.from}
+                />
+                <TextFieldGroup
+                  name="to"
+                  type="date"
+                  value={to}
+                  onChange={this.onChange}
+                  error={errors.to}
+                />
                 <TextAreaFieldGroup
                   placeholder="Write a description..."
                   name="description"

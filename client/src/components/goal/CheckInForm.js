@@ -10,6 +10,7 @@ class CheckInForm extends Component {
     reps: '',
     minutes: '',
     seconds: '',
+    date: '',
     checkin: false,
     errors: {}
   }
@@ -32,14 +33,16 @@ class CheckInForm extends Component {
       weight: this.state.weight,
       reps: this.state.reps,
       minutes: this.state.minutes,
-      seconds: this.state.seconds
+      seconds: this.state.seconds,
+      date: this.state.date
     };
     this.props.addCheckIn(goalId, newCheckIn);
     this.setState({ 
       weight: '',
       reps: '',
       minutes: '',
-      seconds: ''
+      seconds: '',
+      date: ''
     });
   }
   
@@ -50,6 +53,7 @@ class CheckInForm extends Component {
       reps,
       minutes,
       seconds,
+      date,
       errors
     } = this.state;
 
@@ -105,6 +109,13 @@ class CheckInForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 {checkInFields}
+                <TextFieldGroup
+                  name="date"
+                  type="date"
+                  value={date}
+                  onChange={this.onChange}
+                  error={errors.date}
+                />
               </div>
               <button type="submit" className="btn btn-dark">Submit</button>
             </form>

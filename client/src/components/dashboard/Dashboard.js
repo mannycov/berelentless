@@ -23,9 +23,10 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-    const { goals } = this.props.goal;
+    let { goals } = this.props.goal;
 
     let dashboardContent;
+    goals = goals.filter(goal => goal.user === user.id);
 
     if (profile === null || loading === true) {
       dashboardContent = <Spinner />

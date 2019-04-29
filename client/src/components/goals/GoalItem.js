@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deleteGoal, addLike, removeLike } from '../../actions/goalActions';
+import Moment from 'react-moment';
 
 class GoalItem extends Component {
-
   onDeleteClick = id => {
     this.props.deleteGoal(id);
   }
@@ -68,8 +68,9 @@ class GoalItem extends Component {
           <div className="col-md-10">
             <p className="lead">{goal.title}</p>
             <p className="lead">{goal.category}</p>
+            <Moment format="MM/DD/YYYY">{goal.from}</Moment> -{' '}
+            <Moment format="MM/DD/YYYY">{goal.to}</Moment>
             {goalMetrics}
-
             {showActions ?
               (
               <span>
@@ -92,7 +93,6 @@ class GoalItem extends Component {
             ) : null}
             </span>
             ) : null}
-
           </div>
         </div>
       </div>

@@ -77,6 +77,10 @@ const GoalSchema = new Schema({
       },
       checkin: {
         type: Boolean
+      },
+      date: {
+        type: Date,
+        default: Date.now
       }
     }
   ],

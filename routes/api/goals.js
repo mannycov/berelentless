@@ -52,6 +52,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     minutes: req.body.minutes,
     seconds: req.body.seconds,
     days: req.body.days,
+    from: req.body.from,
+    to: req.body.to,
     user: req.user.id,
     name: req.body.name,
     avatar: req.body.avatar
@@ -171,6 +173,7 @@ router.post('/checkin/:id', passport.authenticate('jwt', { session: false }), (r
         minutes: req.body.minutes,
         seconds: req.body.seconds,
         checkin: req.body.checkin,
+        date: req.body.date,
         user: req.user.id
       }
 
