@@ -107,7 +107,7 @@ export const addCheckIn = (goalId, checkIn) => dispatch => {
 // Delete Check-In
 export const deleteCheckIn = (goalId, checkInId) => dispatch => {
   axios
-    .delete(`/api/goals/comment/${goalId}/${checkInId}`)
+    .delete(`/api/goals/checkin/${goalId}/${checkInId}`)
     .then(res => 
       dispatch({
         type: GET_GOAL,

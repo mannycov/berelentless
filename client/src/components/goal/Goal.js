@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import GoalItem from '../goals/GoalItem';
 import CheckInForm from './CheckInForm';
+import CheckInChart from './CheckInChart';
 import CheckInContent from './CheckInContent';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
@@ -28,7 +29,8 @@ class Goal extends Component {
       goalContent = (
         <div>
           <GoalItem goal={goal} showActions={false} />
-          <CheckInContent goal={goal} checkins={checkins} />
+          <CheckInChart goal={goal} checkins={checkins} />
+          <CheckInContent goal={goal} goalId={goal._id} checkins={checkins} />
           <CheckInForm goalId={goal._id} />
           <CommentForm goalId={goal._id} />
           <CommentFeed goalId={goal._id} comments={goal.comments} />
@@ -39,7 +41,8 @@ class Goal extends Component {
       goalContent = (
         <div>
           <GoalItem goal={goal} showActions={false} />
-          <CheckInContent goalId={goal._id} checkins={checkins} />
+          <CheckInChart goal={goal} checkins={checkins} />
+          <CheckInContent goal={goal} goalId={goal._id} checkins={checkins} />
           <CommentForm goalId={goal._id} />
           <CommentFeed goalId={goal._id} comments={goal.comments} />
         </div>
