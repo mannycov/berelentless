@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 import Moment from 'react-moment';
+import { startSession } from 'mongoose';
 
 class CheckInChart extends Component {
   state = {
@@ -55,7 +56,8 @@ class CheckInChart extends Component {
     let datasets;
     let weightData, repsData;
     let minutesData, secondsData;
-    let weight, reps, minutes, seconds;
+    let habitData;
+    let weight, reps, minutes, seconds, days;
 
     if (goal.category === 'Strength') {
       weight = checkins.map(checkin => checkin.weight);
@@ -91,7 +93,16 @@ class CheckInChart extends Component {
         yAxisID: 'y-axis-2'
       }
       datasets = [minutesData, secondsData];
-    };
+    } else if (goal.category === 'Habit') {
+      const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+      days = range(1, checkins.length, 1);
+      habitData = {
+        label: 'Days',
+        data: days,
+        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+      }
+      datasets = [habitData];
+    }
 
     const chartData = {
       labels: checkInDates,

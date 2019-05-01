@@ -15,34 +15,64 @@ import { deleteCheckIn } from '../../actions/goalActions';
       goalId,
       auth
     } = this.props;
-    const checkInData = checkins.map(checkin => (
-      <tr key={checkin._id}>
-        <td>{goal.category === 'Strength' ? checkin.weight : checkin.minutes}</td>
-        <td>{goal.category === 'Strength' ? checkin.reps : checkin.seconds}</td>
-        <td><Moment format="MM/DD/YYYY">{checkin.date}</Moment></td>
-        <td>
-          {checkin.user === auth.user.id ? (
-            <button
-              onClick={() => this.onDeleteClick(goalId, checkin._id)}
-              type="button"
-              className="btn btn-danger mr-1">
-              <i className="fas fa-times" />
-            </button>
-          ) : null}
-        </td>
-      </tr>
-    ));
+    let goalTableHead, checkInData;
+    if (goal.category === 'Strength' || goal.category === 'Conditioning') {
+      goalTableHead = (
+        <tr>
+          <th>{goal.category === 'Strength' ? 'Weight' : 'Minutes'}</th>
+          <th>{goal.category === 'Strength' ? 'Reps' : 'Seconds'}</th>
+          <th>Date</th>
+          <th />
+        </tr>
+      );
+      checkInData = checkins.map(checkin => (
+        <tr key={checkin._id}>
+          <td>{goal.category === 'Strength' ? checkin.weight : checkin.minutes}</td>
+          <td>{goal.category === 'Strength' ? checkin.reps : checkin.seconds}</td>
+          <td><Moment format="MM/DD/YYYY">{checkin.date}</Moment></td>
+          <td>
+            {checkin.user === auth.user.id ? (
+              <button
+                onClick={() => this.onDeleteClick(goalId, checkin._id)}
+                type="button"
+                className="btn btn-danger mr-1">
+                <i className="fas fa-times" />
+              </button>
+            ) : null}
+          </td>
+        </tr>
+      ));
+    } else {
+      goalTableHead = (
+        <tr>
+          <th>Check In</th>
+          <th>Date</th>
+          <th />
+        </tr>
+      );
+      checkInData = checkins.map(checkin => (
+        <tr key={checkin._id}>
+          <td><i className="fas fa-check"></i></td>
+          <td><Moment format="MM/DD/YYYY">{checkin.date}</Moment></td>
+          <td>
+            {checkin.user === auth.user.id ? (
+              <button
+                onClick={() => this.onDeleteClick(goalId, checkin._id)}
+                type="button"
+                className="btn btn-danger mr-1">
+                <i className="fas fa-times" />
+              </button>
+            ) : null}
+          </td>
+        </tr>
+      ));
+    }
     return (
       <div>
         <h4 className="mb-4">Check Ins</h4>
         <table className="table">
           <thead>
-            <tr>
-              <th>{goal.category === 'Strength' ? 'Weight' : 'Minutes'}</th>
-              <th>{goal.category === 'Strength' ? 'Reps' : 'Seconds'}</th>
-              <th>Date</th>
-              <th />
-            </tr>
+            {goalTableHead}
             {checkInData}
           </thead>
         </table>
