@@ -12,7 +12,7 @@ class ProfileHeader extends Component {
           <div className="card card-body bg-info text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img className="rounded-circle" src={`http://localhost:3000/public/uploads/${profile.photo}`} alt="" />
+                <img className="rounded-circle" src={`/public/uploads/${profile.photo}`} alt="" />
               </div>
             </div>
             <div className="text-center">

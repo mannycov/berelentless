@@ -49,10 +49,6 @@ class CreateProfile extends Component {
     formData.append('twitter', this.state.twitter);
     formData.append('facebook', this.state.facebook);
     formData.append('instagram', this.state.instagram);
-    
-    for (const key of formData) {
-      console.log(key)
-    }
 
     this.props.createProfile(formData, this.props.history);
   }
