@@ -5,6 +5,13 @@ import isEmpty from '../../validation/is-empty';
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
+    let profilePhoto;
+
+    if (profile.photo) {
+      profilePhoto = `/public/uploads/${profile.photo}`;
+    } else {
+      profilePhoto = profile.user.avatar;
+    }
 
     return (
       <div className="row">
@@ -12,7 +19,7 @@ class ProfileHeader extends Component {
           <div className="card card-body bg-info text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img className="rounded-circle" src={`/public/uploads/${profile.photo}`} alt="" />
+                <img className="rounded-circle" src={profilePhoto} alt="" />
               </div>
             </div>
             <div className="text-center">
