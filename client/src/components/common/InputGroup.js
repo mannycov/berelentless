@@ -25,6 +25,7 @@ const InputGroup = ({
         placeholder={placeholder}
         name={name}
         value={value}
+        type={type}
         onChange={onChange}
       />
       {error && (

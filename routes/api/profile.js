@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
@@ -10,6 +12,38 @@ const validateProfileInput = require('../../validation/profile');
 const Profile = require('../../models/profile');
 // Load User Model
 const User = require('../../models/user');
+
+// Set the Storage Engine
+const storage = multer.diskStorage({
+  destination: 'client/public/uploads/',
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+// Init Upload
+const upload = multer({
+  storage: storage,
+  fileFilter: function(req, file, cb) {
+    checkFileType(file, cb);
+  }
+});
+
+// Check File Type
+function checkFileType(file, cb) {
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb('Error: Images Only!');
+  }
+}
 
 // @route GET api/profile
 // @desc Get current user's profile
@@ -86,7 +120,7 @@ router.get('/user/:user_id', (req, res) => {
 // @route POST api/profile
 // @desc Create or edit user's profile
 // @access Private
-router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/', upload.single('photo'), passport.authenticate('jwt', { session: false }), (req, res) => {
   const { errors, isValid } = validateProfileInput(req.body);
 
   // Check Validation
@@ -95,11 +129,12 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     return res.status(400).json(errors);
   }
 
-
   // Get fields
   const profileFields = {};
   profileFields.user = req.user.id;
   if (req.body.handle) profileFields.handle = req.body.handle;
+  if (req.file) profileFields.photo = req.file.filename;
+  if (req.body.avatar) profileFields.avatar = req.body.avatar;
   if (req.body.location) profileFields.location = req.body.location;
   if (req.body.interests) profileFields.interests = req.body.interests;
   if (req.body.bio) profileFields.bio = req.body.bio;
@@ -143,6 +178,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
       }
     });
 });
+
+
 
 // @route DELETE api/profile
 // @desc Delete user and profile

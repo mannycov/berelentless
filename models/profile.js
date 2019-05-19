@@ -11,6 +11,9 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
+  photo: {
+    type: String
+  },
   location: {
     type: String
   },

@@ -11,6 +11,7 @@ class CreateProfile extends Component {
   state = {
     displaySocialInputs: false,
     handle: '',
+    photo: '',
     location: '',
     interests: '',
     bio: '',
@@ -31,21 +32,29 @@ class CreateProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  onChangeFile = e => {
+    this.setState({ photo: e.target.files[0] })
+  }
+
   onSubmit = e => {
     e.preventDefault();
 
-    const profileData = {
-      handle: this.state.handle,
-      location: this.state.location,
-      interests: this.state.interests,
-      bio: this.state.bio,
-      youtube: this.state.youtube,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      instagram: this.state.instagram
-    };
+    const formData = new FormData();
+    formData.append('handle', this.state.handle);
+    formData.append('photo', this.state.photo);
+    formData.append('location', this.state.location);
+    formData.append('interests', this.state.interests);
+    formData.append('bio', this.state.bio);
+    formData.append('youtube', this.state.youtube);
+    formData.append('twitter', this.state.twitter);
+    formData.append('facebook', this.state.facebook);
+    formData.append('instagram', this.state.instagram);
+    
+    for (const key of formData) {
+      console.log(key)
+    }
 
-    this.props.createProfile(profileData, this.props.history);
+    this.props.createProfile(formData, this.props.history);
   }
 
   render() {
@@ -102,7 +111,7 @@ class CreateProfile extends Component {
                 Input your information here
               </p>
               <small className="d-block pb-3">* = required fields</small>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit} encType="multipart/form-data">
                 <TextFieldGroup 
                   placeholder="* Profile Handle"
                   name="handle"
@@ -111,6 +120,7 @@ class CreateProfile extends Component {
                   error={errors.handle}
                   info="A unique handle for your profile"
                 />
+                <input name="photo" type="file" onChange={this.onChangeFile} />
                 <TextFieldGroup 
                   placeholder="Location"
                   name="location"

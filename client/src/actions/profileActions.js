@@ -48,9 +48,13 @@ export const getProfileByHandle = handle => dispatch => {
 };
 
 // Create profile
-export const createProfile = (profileData, history) => dispatch => {
+export const createProfile = (formData, history) => dispatch => {
   axios
-    .post('/api/profile', profileData)
+    .post('/api/profile', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
