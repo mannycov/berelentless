@@ -111,7 +111,7 @@ class CheckInChart extends Component {
 
     return (
       <div>
-        <h4 className="mb-4">Check In Entries</h4>
+        <h4 className="mb-4">Progress Chart</h4>
         <Bar 
           data={chartData}
           options={this.state.options}

@@ -22,7 +22,7 @@ class Landing extends Component {
                 </h1>
                 <p className="text-secondary">Set goals for yourself and pursue them relentlessly</p>
                 <hr />
-                <Link to="/register" className="btn btn-lg btn-info mr-2">Sign Up</Link>
+                <Link to="/register" className="btn btn-lg btn-primary mr-2">Sign Up</Link>
                 <Link to="/login" className="btn btn-lg btn-light">Log In</Link>
               </div>
             </div>

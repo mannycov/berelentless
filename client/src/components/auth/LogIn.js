@@ -71,7 +71,7 @@ class LogIn extends Component {
                   onChange={this.onChange}
                   error={errors.password}
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" className="btn btn-primary btn-block mt-4" />
               </form>
             </div>
           </div>

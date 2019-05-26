@@ -13,13 +13,25 @@ import { getGoal } from '../../actions/goalActions';
 
 class Goal extends Component {
 
+  state = {
+    complete: false
+  }
+
   componentDidMount() {
     this.props.getGoal(this.props.match.params.id);
+  }
+
+  onChange = e => {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({[name]: value});
   }
 
   render() {
     const { auth } = this.props;
     const { goal, loading } = this.props.goal;
+    const { complete } = this.state;
     const checkins = goal.checkins;
     let goalContent;
 
@@ -28,7 +40,7 @@ class Goal extends Component {
     } else if (goal.user === auth.user.id) {
       goalContent = (
         <div>
-          <GoalItem goal={goal} showActions={false} />
+          <GoalItem complete={complete} goal={goal} showActions={false} />
           <CheckInChart goal={goal} checkins={checkins} />
           <CheckInContent goal={goal} goalId={goal._id} checkins={checkins} />
           <CheckInForm goalId={goal._id} />
@@ -57,6 +69,14 @@ class Goal extends Component {
               <Link to="/feed" className="btn btn-light mb-3">
                 Back to Feed
               </Link>
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">
+                    <input name="complete" type="checkbox" checked={complete} onChange={this.onChange} aria-label="Checkbox for following text input" />
+                  </div>
+                </div>
+                <div>{' '}Is this goal complete?</div>
+              </div>
               {goalContent}
             </div>
           </div>

@@ -10,7 +10,7 @@ const passport = require('passport');
 
 const app = express();
 
-// Public Folder
+// Static Assets
 app.use(express.static('client'));
 
 // Body Parser Middleware

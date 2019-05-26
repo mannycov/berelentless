@@ -7,3 +7,6 @@ export default function Footer() {
     </footer>
   )
 }
+
+// bg-dark text-white mt-5 p-4 text-center
+// style={{position: 'bottom', width: '100%'}}

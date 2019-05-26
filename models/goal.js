@@ -39,7 +39,7 @@ const GoalSchema = new Schema({
   to: {
     type: Date
   },
-  current: {
+  complete: {
     type: Boolean,
     default: false
   },

@@ -22,7 +22,10 @@ class CheckInForm extends Component {
   }
 
   onChange = e => {
-    this.setState({[e.target.name]: e.target.value});
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({[name]: value});
   }
 
   onSubmit = e => {
@@ -102,7 +105,7 @@ class CheckInForm extends Component {
     return (
       <div className="checkin-form mb-3">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">
+          <div className="card-header bg-primary text-white">
             Add a Check In
           </div>
           <div className="card-body">

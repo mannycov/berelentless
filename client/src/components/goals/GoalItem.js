@@ -30,46 +30,61 @@ class GoalItem extends Component {
   }
   
   render() {
-    const { goal, auth, showActions } = this.props;
+    const {
+      goal,
+      complete,
+      auth,
+      showActions
+    } = this.props;
     let goalMetrics;
 
     if (goal.category === 'Strength') {
       goalMetrics = (
         <div>
-          {goal.weightTarget ? <p className="lead">Weight Target - {goal.weightTarget}</p> : null}
-          {goal.repTarget ? <p className="lead">Rep Target - {goal.repTarget}</p> : null}
+          <h6 className="card-subtitle">Target</h6>
+          <p className="lead">{goal.weightTarget ? goal.weightTarget : null} lbs. {goal.repTarget ? goal.repTarget : null} reps</p>
         </div>
       );
     } else if (goal.category === 'Conditioning') {
       goalMetrics = (
         <div>
-          {goal.minutes ? <p className="lead">Minutes - {goal.minutes}</p> : null}
-          {goal.seconds ? <p className="lead">Seconds - {goal.seconds}</p> : null}
+          <h6 className="card-subtitle">Target</h6>
+          <p className="lead">{goal.minutes ? goal.minutes : '00'}:{goal.seconds ? goal.seconds : '00'}</p>
         </div>
       );
     } else if (goal.category === 'Habit') {
-      goalMetrics = goal.days ? <p className="lead">Days - {goal.days}</p> : null
+      goalMetrics = (
+        <div>
+          <h6 className="card-subtitle">Target</h6>
+          {goal.days ? <p className="lead">{goal.days} Days</p> : null}
+        </div>
+      )
     }
 
     return (
-      <div className="card card-body mb-3">
+      <div className="card card-body mb-3" style={{width: '24rem'}}>
         <div className="row">
-          <div className="col-md-2">
+          <div>
             <a href="profile.html">
               <img
-                className="rounded-circle d-none d-md-block"
+                className="rounded-circle"
                 src={goal.avatar}
-                alt=""
+                alt="profile-img"
+                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '80%'}}
               />
             </a>
             <br />
             <p className="text-center">{goal.name}</p>
           </div>
           <div className="col-md-10">
-            <p className="lead">{goal.title}</p>
-            <p className="lead">{goal.category}</p>
+            <p className="lead">{complete ? 'Congratulations on Completing Your Goal!' : null}</p>
+            <h5 className="card-title">{goal.title}</h5>
+            <h6 className="card-subtitle">{goal.category}</h6>
+            <br/>
             <Moment format="MM/DD/YYYY">{goal.from}</Moment> -{' '}
             <Moment format="MM/DD/YYYY">{goal.to}</Moment>
+            <br/>
+            <br/>
             {goalMetrics}
             {showActions ?
               (
@@ -83,8 +98,8 @@ class GoalItem extends Component {
             <button onClick={() => this.onUnlikeClick(goal._id)} type="button" className="btn btn-light mr-1">
               <i className="text-secondary fas fa-thumbs-down"></i>
             </button>
-            <Link to={`/goal/${goal._id}`} className="btn btn-info mr-1">
-              Comments
+            <Link to={`/goal/${goal._id}`} className="btn btn-primary mr-1">
+              View
             </Link>
             {goal.user === auth.user.id ? (
               <button onClick={() => this.onDeleteClick(goal._id)} type="button" className="btn btn-danger mr-1">

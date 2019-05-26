@@ -12,6 +12,7 @@ class EditProfile extends Component {
   state = {
     displaySocialInputs: false,
     handle: '',
+    photo: '',
     location: '',
     interests: '',
     bio: '',
@@ -53,6 +54,7 @@ class EditProfile extends Component {
       // Set component fields state
       this.setState({
         handle: profile.handle,
+        photo: profile.photo,
         location: profile.location,
         interests: interestsCSV,
         bio: profile.bio,
@@ -68,21 +70,25 @@ class EditProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  onChangeFile = e => {
+    this.setState({ photo: e.target.files[0] })
+  }
+
   onSubmit = e => {
     e.preventDefault();
 
-    const profileData = {
-      handle: this.state.handle,
-      location: this.state.location,
-      interests: this.state.interests,
-      bio: this.state.bio,
-      youtube: this.state.youtube,
-      twitter: this.state.twitter,
-      facebook: this.state.facebook,
-      instagram: this.state.instagram
-    };
+    const formData = new FormData();
+    formData.append('handle', this.state.handle);
+    formData.append('photo', this.state.photo);
+    formData.append('location', this.state.location);
+    formData.append('interests', this.state.interests);
+    formData.append('bio', this.state.bio);
+    formData.append('youtube', this.state.youtube);
+    formData.append('twitter', this.state.twitter);
+    formData.append('facebook', this.state.facebook);
+    formData.append('instagram', this.state.instagram);
 
-    this.props.createProfile(profileData, this.props.history);
+    this.props.createProfile(formData, this.props.history);
   }
 
   render() {
@@ -146,6 +152,7 @@ class EditProfile extends Component {
                   error={errors.handle}
                   info="A unique handle for your profile"
                 />
+                <input name="photo" type="file" onChange={this.onChangeFile} />
                 <TextFieldGroup 
                   placeholder="Location"
                   name="location"
@@ -182,7 +189,7 @@ class EditProfile extends Component {
                   }} className="btn btn-light">Edit Social Media Links</button>
                 </div>
                 {socialInputs}
-                <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" value="Submit" className="btn btn-primary btn-block mt-4" />
               </form>
             </div>
           </div>
