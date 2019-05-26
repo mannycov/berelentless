@@ -32,7 +32,7 @@ class Profiles extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">BeActive Profiles</h1>
+              <h1 className="display-4 text-center">BeRelentless Profiles</h1>
               <p className="lead text-center">
                 Browse and connect with members
               </p>

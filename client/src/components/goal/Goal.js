@@ -75,8 +75,9 @@ class Goal extends Component {
                     <input name="complete" type="checkbox" checked={complete} onChange={this.onChange} aria-label="Checkbox for following text input" />
                   </div>
                 </div>
-                <div>{' '}Is this goal complete?</div>
+                <div>Is this goal complete?</div>
               </div>
+              <h5>{this.state.complete ? 'Congratulations on Completing Your Goal!' : null}</h5>
               {goalContent}
             </div>
           </div>

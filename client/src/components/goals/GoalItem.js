@@ -32,7 +32,6 @@ class GoalItem extends Component {
   render() {
     const {
       goal,
-      complete,
       auth,
       showActions
     } = this.props;
@@ -62,7 +61,7 @@ class GoalItem extends Component {
     }
 
     return (
-      <div className="card card-body mb-3" style={{width: '24rem'}}>
+      <div className="card card-body mb-3 bg-light" style={{width: '24rem'}}>
         <div className="row">
           <div>
             <a href="profile.html">
@@ -77,7 +76,6 @@ class GoalItem extends Component {
             <p className="text-center">{goal.name}</p>
           </div>
           <div className="col-md-10">
-            <p className="lead">{complete ? 'Congratulations on Completing Your Goal!' : null}</p>
             <h5 className="card-title">{goal.title}</h5>
             <h6 className="card-subtitle">{goal.category}</h6>
             <br/>
