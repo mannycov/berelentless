@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 import Moment from 'react-moment';
-import { startSession } from 'mongoose';
+import moment from 'moment'
 
 class CheckInChart extends Component {
   state = {
@@ -52,23 +52,19 @@ class CheckInChart extends Component {
   }
   render() {
     const { checkins, goal } = this.props;
-    const checkInDates = checkins.map(checkin => checkin.date);
+    const checkInDates = checkins.map(checkin => moment(checkin.date).format('L'));
     let datasets;
-    let weightData, repsData;
-    let minutesData, secondsData;
-    let habitData;
-    let weight, reps, minutes, seconds, days;
 
     if (goal.category === 'Strength') {
-      weight = checkins.map(checkin => checkin.weight);
-      reps = checkins.map(checkin => checkin.reps);
-      weightData = {
+      const weight = checkins.map(checkin => checkin.weight);
+      const reps = checkins.map(checkin => checkin.reps);
+      const weightData = {
         label: 'Weight',
         data: weight,
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
         yAxisID: 'y-axis-1'
       }
-      repsData = {
+       const repsData = {
         label: 'Reps',
         data: reps,
         backgroundColor: 'rgba(54, 162, 235, 0.6)',
@@ -77,15 +73,15 @@ class CheckInChart extends Component {
       }
       datasets = [weightData, repsData];
     } else if (goal.category === 'Conditioning') {
-      minutes = checkins.map(checkin => checkin.minutes);
-      seconds = checkins.map(checkin => checkin.seconds);
-      minutesData = {
+      const minutes = checkins.map(checkin => checkin.minutes);
+      const seconds = checkins.map(checkin => checkin.seconds);
+      const minutesData = {
         label: 'Minutes',
         data: minutes,
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
         yAxisID: 'y-axis-1'
       }
-      secondsData = {
+      const secondsData = {
         label: 'Seconds',
         data: seconds,
         backgroundColor: 'rgba(54, 162, 235, 0.6)',
@@ -95,8 +91,8 @@ class CheckInChart extends Component {
       datasets = [minutesData, secondsData];
     } else if (goal.category === 'Habit') {
       const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
-      days = range(1, checkins.length, 1);
-      habitData = {
+      const days = range(1, checkins.length, 1);
+      const habitData = {
         label: 'Days',
         data: days,
         backgroundColor: 'rgba(255, 99, 132, 0.6)'
