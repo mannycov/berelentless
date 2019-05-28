@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import { getCurrentProfile } from '../../actions/profileActions';
 import { deleteGoal, addLike, removeLike } from '../../actions/goalActions';
 import Moment from 'react-moment';
 
@@ -35,7 +36,15 @@ class GoalItem extends Component {
       auth,
       showActions
     } = this.props;
+    const { profile } = this.props.profile;
     let goalMetrics;
+    let profilePhoto;
+
+    if (profile.photo) {
+      profilePhoto = `/public/uploads/${profile.photo}`;
+    } else {
+      profilePhoto = goal.avatr;
+    }
 
     if (goal.category === 'Strength') {
       goalMetrics = (
@@ -67,7 +76,7 @@ class GoalItem extends Component {
             <a href="profile.html">
               <img
                 className="rounded-circle"
-                src={goal.avatar}
+                src={profilePhoto}
                 alt="profile-img"
                 style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '80%'}}
               />

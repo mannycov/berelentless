@@ -10,7 +10,6 @@ import GoalItem from '../goals/GoalItem';
 import ProfileActions from './ProfileActions';
 
 class Dashboard extends Component {
-
   componentDidMount() {
     this.props.getCurrentProfile();
     this.props.getGoals();
