@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
-import Moment from 'react-moment';
 import moment from 'moment'
 
 class CheckInChart extends Component {
