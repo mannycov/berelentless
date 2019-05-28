@@ -42,7 +42,7 @@ class GoalItem extends Component {
     if (profile.photo) {
       profilePhoto = `/public/uploads/${profile.photo}`;
     } else {
-      profilePhoto = goal.avatr;
+      profilePhoto = goal.avatar;
     }
 
     if (goal.category === 'Strength') {
@@ -134,6 +134,7 @@ GoalItem.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  profile: state.profile,
   auth: state.auth
 });
 
