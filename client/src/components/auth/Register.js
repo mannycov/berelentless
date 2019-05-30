@@ -70,7 +70,7 @@ class Register extends Component {
                   value={this.state.email}
                   onChange={this.onChange}
                   error={errors.email}
-                  info="This site uses Gravatar by default, to change your profile photo, make sure to update the photo when creating your profile"
+                  info="This site uses Gravatar by default, to change your profile photo, make sure to do so when creating your profile"
                 />
                 <TextFieldGroup
                   placeholder="Password"

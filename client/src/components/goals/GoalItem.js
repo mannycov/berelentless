@@ -69,7 +69,7 @@ class GoalItem extends Component {
     }
 
     return (
-      <div className="card card-body mb-3 bg-light" style={{width: '24rem'}}>
+      <div className="card card-body bg-light mb-3" style={{width: '24rem'}}>
         <div className="row">
           <div>
             <a href="profile.html">

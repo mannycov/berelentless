@@ -23,7 +23,6 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
     let { goals } = this.props.goal;
-
     let dashboardContent;
     goals = goals.filter(goal => goal.user === user.id);
 
@@ -39,7 +38,7 @@ class Dashboard extends Component {
             </p>
             <ProfileActions />
             <GoalForm />
-            {goals.length > 0 ?  <h1 className="display-4">My Goals</h1> : null}
+            {goals.length > 0 ? <h1 className="display-4">My Goals</h1> : null}
             {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
             <div style={{ marginBottom: '30px' }} />
             <button onClick={this.onDeleteClick} className="btn btn-danger">Delete My Account</button>
