@@ -152,7 +152,15 @@ class EditProfile extends Component {
                   error={errors.handle}
                   info="A unique handle for your profile"
                 />
-                <input name="photo" type="file" onChange={this.onChangeFile} />
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                  </div>
+                  <div className="custom-file">
+                    <input class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="photo" type="file" onChange={this.onChangeFile} />
+                    <label htmlFor="inputGroupFile01" className="custom-file-label">Choose Your Photo</label>
+                  </div>
+                </div>
                 <TextFieldGroup 
                   placeholder="Location"
                   name="location"
