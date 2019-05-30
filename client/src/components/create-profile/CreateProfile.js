@@ -121,7 +121,7 @@ class CreateProfile extends Component {
                     <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
                   </div>
                   <div className="custom-file">
-                    <input class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="photo" type="file" onChange={this.onChangeFile} />
+                    <input className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="photo" type="file" onChange={this.onChangeFile} />
                     <label htmlFor="inputGroupFile01" className="custom-file-label">Choose Your Photo</label>
                   </div>
                 </div>
