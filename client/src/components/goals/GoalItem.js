@@ -40,7 +40,11 @@ class GoalItem extends Component {
     let profilePhoto;
 
     if (profile) {
-      profilePhoto = `/public/uploads/${profile.photo}`;
+      if (profile.photo) {
+        profilePhoto = `/public/uploads/${profile.photo}`;
+      } else {
+        profilePhoto = goal.avatar;
+      }
     } else {
       profilePhoto = goal.avatar;
     }

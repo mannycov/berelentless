@@ -12,11 +12,6 @@ import Spinner from '../common/Spinner';
 import { getGoal } from '../../actions/goalActions';
 
 class Goal extends Component {
-
-  state = {
-    complete: false
-  }
-
   componentDidMount() {
     this.props.getGoal(this.props.match.params.id);
   }
@@ -31,16 +26,21 @@ class Goal extends Component {
   render() {
     const { auth } = this.props;
     const { goal, loading } = this.props.goal;
-    const { complete } = this.state;
     const checkins = goal.checkins;
     let goalContent;
+    
+    const goalItem = (
+      <div style={{margin: 'auto', width: '50%'}}>
+        <GoalItem goal={goal} showActions={false} />
+      </div>
+    );
 
     if (goal === null|| loading || Object.keys(goal).length === 0) {
       goalContent = <Spinner />
     } else if (goal.user === auth.user.id) {
       goalContent = (
         <div>
-          <GoalItem complete={complete} goal={goal} showActions={false} />
+          {goalItem}
           <CheckInChart goal={goal} checkins={checkins} />
           <CheckInContent goal={goal} goalId={goal._id} checkins={checkins} />
           <CheckInForm goalId={goal._id} />
@@ -52,7 +52,7 @@ class Goal extends Component {
      else {
       goalContent = (
         <div>
-          <GoalItem goal={goal} showActions={false} />
+          {goalItem}
           <CheckInChart goal={goal} checkins={checkins} />
           <CheckInContent goal={goal} goalId={goal._id} checkins={checkins} />
           <CommentForm goalId={goal._id} />
@@ -69,15 +69,6 @@ class Goal extends Component {
               <Link to="/feed" className="btn btn-light mb-3">
                 Back to Feed
               </Link>
-              <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                  <div className="input-group-text">
-                    <input name="complete" type="checkbox" checked={complete} onChange={this.onChange} aria-label="Checkbox for following text input" />
-                  </div>
-                </div>
-                <div>Is this goal complete?</div>
-              </div>
-              <h5>{this.state.complete ? 'Congratulations on Completing Your Goal!' : null}</h5>
               {goalContent}
             </div>
           </div>

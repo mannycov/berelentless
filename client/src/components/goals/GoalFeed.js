@@ -6,7 +6,9 @@ class GoalFeed extends Component {
   render() {
     const { goals } = this.props;
 
-    return goals.map(goal => <GoalItem key={goal._id} goal={goal} />);
+    return (
+      <div style={{margin: 'auto', width: '50%'}}>{ goals.map(goal => <GoalItem key={goal._id} goal={goal} />)}</div>
+    )
   }
 }
 
