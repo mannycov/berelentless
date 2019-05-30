@@ -39,7 +39,7 @@ class GoalItem extends Component {
     let goalMetrics;
     let profilePhoto;
 
-    if (profile.photo) {
+    if (profile) {
       profilePhoto = `/public/uploads/${profile.photo}`;
     } else {
       profilePhoto = goal.avatar;
@@ -77,7 +77,7 @@ class GoalItem extends Component {
                 className="rounded-circle"
                 src={profilePhoto}
                 alt="profile-img"
-                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '80%'}}
+                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', height: '80%', width: '80%'}}
               />
             </a>
             <br />

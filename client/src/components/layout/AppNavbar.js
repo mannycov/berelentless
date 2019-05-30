@@ -26,6 +26,14 @@ class AppNavbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
+    const { profile } = this.props.profile;
+    let profilePhoto;
+
+    if (profile) {
+      profilePhoto = `/public/uploads/${profile.photo}`;
+    } else {
+      profilePhoto = user.avatar;
+    }
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
@@ -42,7 +50,7 @@ class AppNavbar extends Component {
         <li className="nav-item">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a className="nav-link" onClick={this.onLogoutClick} href="#">
-            <img className="rounded-circle" src={user.avatar} alt={user.name} style={{ width: '25px', marginRight: '5px' }} title="You must have a Gravatar connected to your email to display an image" />{' '}
+            <img className="rounded-circle" src={profilePhoto} alt={user.name} style={{ width: '25px', height: '25px', marginRight: '5px' }} title="You must have a Gravatar connected to your email to display an image" />{' '}
             Log Out
           </a>
         </li>
@@ -101,6 +109,7 @@ AppNavbar.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  profile: state.profile,
   auth: state.auth
 });
 
