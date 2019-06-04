@@ -8,8 +8,8 @@ class ProfileItem extends Component {
     const { profile } = this.props;
     let profilePhoto;
 
-    if (profile.photo) {
-      profilePhoto = `/public/uploads/${profile.photo}`;
+    if (profile.photoLocation) {
+      profilePhoto = profile.photoLocation;
     } else {
       profilePhoto = profile.user.avatar;
     }

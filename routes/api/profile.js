@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const aws = require('aws-sdk');
 const multer = require('multer');
+const multerS3 = require('multer-s3');
 const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -13,21 +15,44 @@ const Profile = require('../../models/profile');
 // Load User Model
 const User = require('../../models/user');
 
-// Set the Storage Engine
-const storage = multer.diskStorage({
-  destination: 'client/public/uploads/',
-  filename: function(req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
+// Set s3
+const s3 = new aws.S3({
+  accessKeyId: 'AKIAZCZGAA32VOP7TDNH',
+  secretAccessKey: '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',
+  Bucket: 'berelentlessapp'
 });
 
-// Init Upload
+// Init upload & storage engine
 const upload = multer({
-  storage: storage,
+  storage: multerS3({
+    s3: s3,
+    bucket: 'berelentlessapp',
+    acl: 'public-read',
+    key: function (req, file, cb) {
+      cb(null , path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
+    }
+  }),
+  limits: {fileSize: 8000000},
   fileFilter: function(req, file, cb) {
     checkFileType(file, cb);
   }
 });
+
+// Set the Storage Engine
+// const storage = multer.diskStorage({
+//   destination: 'client/public/uploads/',
+//   filename: function(req, file, cb) {
+//     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//   }
+// });
+
+// Init Upload
+// const upload = multer({
+//   storage: storage,
+//   fileFilter: function(req, file, cb) {
+//     checkFileType(file, cb);
+//   }
+// });
 
 // Check File Type
 function checkFileType(file, cb) {
@@ -133,7 +158,8 @@ router.post('/', upload.single('photo'), passport.authenticate('jwt', { session:
   const profileFields = {};
   profileFields.user = req.user.id;
   if (req.body.handle) profileFields.handle = req.body.handle;
-  if (req.file) profileFields.photo = req.file.filename;
+  if (req.file) profileFields.photoName = req.file.key;
+  if (req.file) profileFields.photoLocation = req.file.location;
   if (req.body.avatar) profileFields.avatar = req.body.avatar;
   if (req.body.location) profileFields.location = req.body.location;
   if (req.body.interests) profileFields.interests = req.body.interests;

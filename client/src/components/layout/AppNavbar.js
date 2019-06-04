@@ -30,9 +30,11 @@ class AppNavbar extends Component {
     let profilePhoto;
 
     if (profile) {
-      profilePhoto = `/public/uploads/${profile.photo}`;
-    } else {
-      profilePhoto = user.avatar;
+      if (profile.photoLocation) {
+        profilePhoto = profile.photoLocation;
+      } else {
+        profilePhoto = profile.user.avatar;
+      }
     }
 
     const authLinks = (
