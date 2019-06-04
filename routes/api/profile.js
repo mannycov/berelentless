@@ -17,8 +17,8 @@ const User = require('../../models/user');
 
 // Set s3
 const s3 = new aws.S3({
-  accessKeyId: 'AKIAZCZGAA32VOP7TDNH',
-  secretAccessKey: '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',
+  accessKeyId: require('../../config/keys_s3').accessKeyId,
+  secretAccessKey: require('../../config/keys_s3').secretAccessKey,
   Bucket: 'berelentlessapp'
 });
 
@@ -37,22 +37,6 @@ const upload = multer({
     checkFileType(file, cb);
   }
 });
-
-// Set the Storage Engine
-// const storage = multer.diskStorage({
-//   destination: 'client/public/uploads/',
-//   filename: function(req, file, cb) {
-//     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-//   }
-// });
-
-// Init Upload
-// const upload = multer({
-//   storage: storage,
-//   fileFilter: function(req, file, cb) {
-//     checkFileType(file, cb);
-//   }
-// });
 
 // Check File Type
 function checkFileType(file, cb) {

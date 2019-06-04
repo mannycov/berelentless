@@ -29,13 +29,12 @@ class AppNavbar extends Component {
     const { profile } = this.props.profile;
     let profilePhoto;
 
-    if (profile) {
-      if (profile.photoLocation) {
+
+      if (profile) {
         profilePhoto = profile.photoLocation;
       } else {
-        profilePhoto = profile.user.avatar;
+        profilePhoto = user.avatar;
       }
-    }
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
