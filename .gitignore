@@ -64,3 +64,4 @@ typings/
 
 # config keys
 /config/keys_dev.js
+/config/keys_s3.js
