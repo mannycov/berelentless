@@ -2,6 +2,17 @@ img {
   width: 100%;
 }
 
+.App {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex-grow: 1;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;

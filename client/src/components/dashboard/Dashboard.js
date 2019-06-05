@@ -41,7 +41,7 @@ class Dashboard extends Component {
             {goals.length > 0 ? <h1 className="display-4">My Goals</h1> : null}
             {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
             <div style={{ marginBottom: '30px' }} />
-            <button onClick={this.onDeleteClick} className="btn btn-danger">Delete My Account</button>
+            <button onClick={this.onDeleteClick} className="btn btn-danger mb-5">Delete My Account</button>
           </div>
         );
       } else {
