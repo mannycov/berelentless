@@ -40,13 +40,9 @@ class GoalItem extends Component {
     let profilePhoto;
 
     if (profile) {
-      if (profile.photo) {
-        profilePhoto = `/public/uploads/${profile.photo}`;
-      } else {
-        profilePhoto = goal.avatar;
-      }
+      profilePhoto = profile.photoLocation;
     } else {
-      profilePhoto = goal.avatar;
+      profilePhoto = auth.user.avatar;
     }
 
     if (goal.category === 'Strength') {
