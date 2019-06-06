@@ -237,5 +237,4 @@ router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session
     .catch(err => res.status(404).json({ goalnotfound: 'No goal found' }));
 });
 
-
 module.exports = router;
