@@ -194,7 +194,6 @@ router.post('/', upload.single('photo'), passport.authenticate('jwt', { session:
 // @route DELETE api/profile
 // @desc Delete user and profile
 // @access Private
-
 router.delete('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   Profile.findOneAndRemove({ user: req.user.id })
     .then(() => {
