@@ -21,7 +21,7 @@ const s3Keys = require('../../config/keys');
 // Set s3
 const s3 = new aws.S3({
   accessKeyId: s3Keys.accessKeyId,
-  secretAccessKey: s3keys.secretAccessKey,
+  secretAccessKey: s3Keys.secretAccessKey,
   Bucket: 'berelentlessapp'
 });
 
