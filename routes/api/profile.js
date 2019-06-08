@@ -15,10 +15,13 @@ const Profile = require('../../models/profile');
 // Load User Model
 const User = require('../../models/user');
 
+// s3 Keys
+const s3Keys = require('../../config/keys');
+
 // Set s3
 const s3 = new aws.S3({
-  accessKeyId: require('../../config/keys_s3').accessKeyId,
-  secretAccessKey: require('../../config/keys_s3').secretAccessKey,
+  accessKeyId: s3Keys.accessKeyId,
+  secretAccessKey: s3keys.secretAccessKey,
   Bucket: 'berelentlessapp'
 });
 
