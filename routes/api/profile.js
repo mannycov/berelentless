@@ -55,7 +55,7 @@ function checkFileType(file, cb) {
   } else {
     cb('Error: Images Only!');
   }
-}
+};
 
 // @route GET api/profile
 // @desc Get current user's profile
