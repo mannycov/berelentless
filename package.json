@@ -1,5 +1,5 @@
 {
-  "name": "beactive",
+  "name": "berelentless",
   "version": "1.0.0",
   "description": "Fitness Goal App built with MERN stack",
   "main": "server.js",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mannycov/beactive.git"
+    "url": "git+https://github.com/mannycov/berelentless.git"
   },
   "author": "Emanuel Covarrubias",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mannycov/beactive/issues"
+    "url": "https://github.com/mannycov/berelentless/issues"
   },
-  "homepage": "https://github.com/mannycov/beactive#readme",
+  "homepage": "https://github.com/mannycov/berelentless#readme",
   "dependencies": {
     "aws-sdk": "^2.466.0",
     "bcryptjs": "^2.4.3",
@@ -30,7 +30,6 @@
     "concurrently": "^4.1.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "express-fileupload": "^1.1.4",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.14",
