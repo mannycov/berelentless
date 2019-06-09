@@ -39,17 +39,17 @@ class GoalItem extends Component {
     let goalMetrics;
     let profilePhoto;
 
-    if (profile) {
+    if (profile.photoLocation) {
       profilePhoto = profile.photoLocation;
     } else {
-      profilePhoto = auth.user.avatar;
+      profilePhoto = profile.user.avatar;
     }
 
     if (goal.category === 'Strength') {
       goalMetrics = (
         <div>
           <h6 className="card-subtitle">Target</h6>
-          <p className="lead">{goal.weightTarget ? goal.weightTarget : null} lbs. {goal.repTarget ? goal.repTarget : null} reps</p>
+          <p className="lead">{goal.weightTarget ? `${goal.weightTarget} lbs.` : null} {goal.repTarget ? `${goal.repTargetreps} reps` : null}</p>
         </div>
       );
     } else if (goal.category === 'Conditioning') {
@@ -87,8 +87,8 @@ class GoalItem extends Component {
             <h5 className="card-title">{goal.title}</h5>
             <h6 className="card-subtitle">{goal.category}</h6>
             <br/>
-            <Moment format="MM/DD/YYYY">{goal.from}</Moment> -{' '}
-            <Moment format="MM/DD/YYYY">{goal.to}</Moment>
+            {goal.from ? <Moment format="MM/DD/YYYY">{goal.from}</Moment> : null} -{' '}
+            {goal.to ? <Moment format="MM/DD/YYYY">{goal.to}</Moment> : null}
             <br/>
             <br/>
             {goalMetrics}

@@ -29,10 +29,12 @@ class AppNavbar extends Component {
     const { profile } = this.props.profile;
     let profilePhoto;
     
-    if (profile) {
-      profilePhoto = profile.photoLocation;
-    } else {
-      profilePhoto = user.avatar;
+    if (profile !== null) {
+      if (profile.photoLocation) {
+        profilePhoto = profile.photoLocation;
+      } else {
+        profilePhoto = user.avatar;
+      }
     }
 
     const authLinks = (
