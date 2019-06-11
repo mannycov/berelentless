@@ -19,7 +19,7 @@ class ProfileHeader extends Component {
           <div className="card card-body bg-primary text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img className="rounded-circle" src={profilePhoto} alt="" />
+                <img className="rounded-circle" src={profilePhoto} alt="" style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', height: '240px', width: '240px'}}/>
               </div>
             </div>
             <div className="text-center">

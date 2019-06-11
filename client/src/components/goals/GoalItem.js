@@ -69,30 +69,25 @@ class GoalItem extends Component {
     }
 
     return (
-      <div className="card card-body bg-light mb-3" style={{width: '24rem'}}>
-        <div className="row">
-          <div>
-            <a href="profile.html">
-              <img
-                className="rounded-circle"
-                src={profilePhoto}
-                alt="profile-img"
-                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', height: '80%', width: '80%'}}
-              />
-            </a>
-            <br />
-            <p className="text-center">{goal.name}</p>
-          </div>
-          <div className="col-md-10">
-            <h5 className="card-title">{goal.title}</h5>
-            <h6 className="card-subtitle">{goal.category}</h6>
-            <br/>
-            {goal.from ? <Moment format="MM/DD/YYYY">{goal.from}</Moment> : null} -{' '}
-            {goal.to ? <Moment format="MM/DD/YYYY">{goal.to}</Moment> : null}
-            <br/>
-            <br/>
-            {goalMetrics}
-            {showActions ?
+      <div className="card card-body bg-light mb-3" style={{width: '20rem'}}>
+        <img
+          src={profilePhoto}
+          alt="profile-img"
+          className="rounded-circle card-img-top"
+          style={{display: 'block', margin: 'auto', marginTop: '10px', height: '160px', width: '160px'}}
+        />
+        <h5 className="text-center card-title">{goal.name}</h5>
+        <div className="card-body">
+          <h5 className="card-title">{goal.title}</h5>
+          <br/>
+          <h6 className="card-subtitle">{goal.category}</h6>
+          <br/>
+          {goal.from ? <Moment format="MM/DD/YYYY">{goal.from}</Moment> : null} -{' '}
+          {goal.to ? <Moment format="MM/DD/YYYY">{goal.to}</Moment> : null}
+          <br/>
+          <br/>
+          {goalMetrics}
+          {showActions ?
               (
               <span>
               <button onClick={() => this.onLikeClick(goal._id)} type="button" className="btn btn-light mr-1">
@@ -114,7 +109,6 @@ class GoalItem extends Component {
             ) : null}
             </span>
             ) : null}
-          </div>
         </div>
       </div>
     );
