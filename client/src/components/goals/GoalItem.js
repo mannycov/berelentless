@@ -75,6 +75,7 @@ class GoalItem extends Component {
           className="rounded-circle card-img-top"
           style={{display: 'block', margin: 'auto', marginTop: '10px', height: '160px', width: '160px'}}
         />
+        <div style={{ marginBottom: '30px' }} />
         <h5 className="text-center card-title">{goal.name}</h5>
         <div className="card-body">
           <h5 className="card-title">{goal.title}</h5>
@@ -83,9 +84,7 @@ class GoalItem extends Component {
           <br/>
           {goal.from ? <Moment format="MM/DD/YYYY">{goal.from}</Moment> : null} -{' '}
           {goal.to ? <Moment format="MM/DD/YYYY">{goal.to}</Moment> : null}
-          {/* <div style={{ marginBottom: '30px' }} /> */}
-          <br/>
-          <br/>
+          <div style={{ marginBottom: '40px' }} />
           {goalMetrics}
           {showActions ?
               (
