@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { addCheckIn } from '../../actions/goalActions';
 
 class CheckInForm extends Component {
@@ -12,6 +13,7 @@ class CheckInForm extends Component {
     seconds: '',
     date: '',
     checkin: false,
+    note: '',
     errors: {}
   }
 
@@ -37,6 +39,7 @@ class CheckInForm extends Component {
       reps: this.state.reps,
       minutes: this.state.minutes,
       seconds: this.state.seconds,
+      note: this.state.note,
       date: this.state.date
     };
     this.props.addCheckIn(goalId, newCheckIn);
@@ -45,6 +48,7 @@ class CheckInForm extends Component {
       reps: '',
       minutes: '',
       seconds: '',
+      note: '',
       date: ''
     });
   }
@@ -56,6 +60,7 @@ class CheckInForm extends Component {
       reps,
       minutes,
       seconds,
+      note,
       date,
       errors
     } = this.state;
@@ -118,6 +123,14 @@ class CheckInForm extends Component {
                   value={date}
                   onChange={this.onChange}
                   error={errors.date}
+                />
+                <TextAreaFieldGroup
+                  placeholder="Note"
+                  name="note"
+                  value={note}
+                  onChange={this.onChange}
+                  error={errors.note}
+                  info="Add a note"
                 />
               </div>
               <button type="submit" className="btn btn-dark">Submit</button>

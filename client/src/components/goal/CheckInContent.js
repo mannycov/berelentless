@@ -22,6 +22,7 @@ import { deleteCheckIn } from '../../actions/goalActions';
           <th>{goal.category === 'Strength' ? 'Weight' : 'Minutes'}</th>
           <th>{goal.category === 'Strength' ? 'Reps' : 'Seconds'}</th>
           <th>Date</th>
+          <th>Notes</th>
           <th />
         </tr>
       );
@@ -30,6 +31,7 @@ import { deleteCheckIn } from '../../actions/goalActions';
           <td>{goal.category === 'Strength' ? checkin.weight : checkin.minutes}</td>
           <td>{goal.category === 'Strength' ? checkin.reps : checkin.seconds}</td>
           <td><Moment format="MM/DD/YYYY">{checkin.date}</Moment></td>
+          <td>{checkin.note ? checkin.note : null}</td>
           <td>
             {checkin.user === auth.user.id ? (
               <button
@@ -47,6 +49,7 @@ import { deleteCheckIn } from '../../actions/goalActions';
         <tr>
           <th>Check In</th>
           <th>Date</th>
+          <th>Notes</th>
           <th />
         </tr>
       );
@@ -54,6 +57,7 @@ import { deleteCheckIn } from '../../actions/goalActions';
         <tr key={checkin._id}>
           <td><i className="fas fa-check"></i></td>
           <td><Moment format="MM/DD/YYYY">{checkin.date}</Moment></td>
+          <td>{checkin.note ? checkin.note : null}</td>
           <td>
             {checkin.user === auth.user.id ? (
               <button

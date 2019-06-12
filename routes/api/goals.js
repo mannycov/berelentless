@@ -176,7 +176,7 @@ router.post('/checkin/:id', passport.authenticate('jwt', { session: false }), (r
         seconds: req.body.seconds,
         checkin: req.body.checkin,
         date: req.body.date,
-        complete: req.body.complete,
+        note: req.body.note,
         user: req.user.id
       }
 
