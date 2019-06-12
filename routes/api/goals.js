@@ -43,23 +43,26 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     return res.status(400).json(errors);
   }
 
-  const newGoal = new Goal({
-    title: req.body.title,
-    description: req.body.description,
-    category: req.body.category,
-    weightTarget: req.body.weightTarget,
-    repTarget: req.body.repTarget,
-    minutes: req.body.minutes,
-    seconds: req.body.seconds,
-    days: req.body.days,
-    from: req.body.from,
-    to: req.body.to,
-    user: req.user.id,
-    name: req.body.name,
-    avatar: req.body.avatar
-  });
-
-  newGoal.save().then(goal => res.json(goal));
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      const newGoal = new Goal({
+        title: req.body.title,
+        description: req.body.description,
+        category: req.body.category,
+        weightTarget: req.body.weightTarget,
+        repTarget: req.body.repTarget,
+        minutes: req.body.minutes,
+        seconds: req.body.seconds,
+        days: req.body.days,
+        from: req.body.from,
+        to: req.body.to,
+        user: req.user.id,
+        profilePhoto: profile.photoLocation,
+        name: req.body.name,
+        avatar: req.body.avatar
+      });
+      newGoal.save().then(goal => res.json(goal));
+    });
 });
 
 // @route   DELETE api/goals/:id
@@ -74,7 +77,6 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
           if (goal.user.toString() !== req.user.id) {
             return res.status(401).json({ notauthorized: 'User not authorized' });
           }
-
           // Delete
           goal.remove().then(() => res.json({ success: true }));
         })

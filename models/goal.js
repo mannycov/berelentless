@@ -43,6 +43,9 @@ const GoalSchema = new Schema({
     type: Boolean,
     default: false
   },
+  profilePhoto: {
+    type: String
+  },
   name: {
     type: String
   },

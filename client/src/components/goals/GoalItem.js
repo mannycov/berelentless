@@ -35,14 +35,13 @@ class GoalItem extends Component {
       auth,
       showActions
     } = this.props;
-    const { profile } = this.props.profile;
     let goalMetrics;
     let profilePhoto;
 
-    if (profile.photoLocation) {
-      profilePhoto = profile.photoLocation;
+    if (goal.profilePhoto) {
+      profilePhoto = goal.profilePhoto;
     } else {
-      profilePhoto = profile.user.avatar;
+      profilePhoto = goal.avatar;
     }
 
     if (goal.category === 'Strength') {
@@ -69,7 +68,7 @@ class GoalItem extends Component {
     }
 
     return (
-      <div className="card card-body bg-light mb-3" style={{width: '20rem'}}>
+      <div className="card card-body bg-light mb-3" style={{width: '65%', margin: 'auto'}}>
         <img
           src={profilePhoto}
           alt="profile-img"
@@ -84,6 +83,7 @@ class GoalItem extends Component {
           <br/>
           {goal.from ? <Moment format="MM/DD/YYYY">{goal.from}</Moment> : null} -{' '}
           {goal.to ? <Moment format="MM/DD/YYYY">{goal.to}</Moment> : null}
+          {/* <div style={{ marginBottom: '30px' }} /> */}
           <br/>
           <br/>
           {goalMetrics}

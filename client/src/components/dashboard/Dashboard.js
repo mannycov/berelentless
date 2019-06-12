@@ -38,8 +38,11 @@ class Dashboard extends Component {
             </p>
             <ProfileActions />
             <GoalForm />
-            {goals.length > 0 ? <h1 className="display-4">My Goals</h1> : null}
-            {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
+            {goals.length > 0 ? <h1 className="display-4 text-center">My Goals</h1> : null}
+            <div style={{margin: 'auto', width: '50%'}}>
+              {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
+            </div>
+            
             <div style={{ marginBottom: '30px' }} />
             <button onClick={this.onDeleteClick} className="btn btn-danger mb-5">Delete My Account</button>
           </div>
