@@ -28,7 +28,6 @@ class Dashboard extends Component {
   }
 
   onDeleteClick = () => {
-    // show modal then deleteaccount when modal confirm is clicked
     this.props.deleteAccount();
   }
 
@@ -57,12 +56,25 @@ class Dashboard extends Component {
               {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
             </div>
 
+            {/* Delete account Modal */}
             <div className={showHideClassName}>
-              <section className='modal-main'>
-                Are you sure you want to delete your account?
-                <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Cancel</button>
-                <button type="button" className="btn btn-danger" onClick={this.onDeleteClick}>Delete</button>
-              </section>
+              <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Delete Account</h5>
+                    <button type="button" onClick={this.closeModal} className="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <p>Are you sure you want to delete your account?</p>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" onClick={this.onDeleteClick} className="btn btn-danger">Delete</button>
+                    <button type="button" onClick={this.closeModal} className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
             </div>
             <div style={{ marginBottom: '30px' }} />
             <button className="btn btn-danger mb-5" type="button" onClick={this.showModal}>Delete My Account</button>
