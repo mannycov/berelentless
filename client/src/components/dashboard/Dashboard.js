@@ -10,12 +10,25 @@ import GoalItem from '../goals/GoalItem';
 import ProfileActions from './ProfileActions';
 
 class Dashboard extends Component {
+  state = {
+    show: false
+  }
+
   componentDidMount() {
     this.props.getCurrentProfile();
     this.props.getGoals();
   }
 
+  showModal = () => {
+    this.setState({ show: true });
+  }
+
+  closeModal = () => {
+    this.setState({ show: false });
+  }
+
   onDeleteClick = () => {
+    // show modal then deleteaccount when modal confirm is clicked
     this.props.deleteAccount();
   }
 
@@ -23,6 +36,7 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
     let { goals } = this.props.goal;
+    const showHideClassName = this.state.show ? 'modal display-block' : 'modal display-none'; 
     let dashboardContent;
     goals = goals.filter(goal => goal.user === user.id);
 
@@ -42,9 +56,16 @@ class Dashboard extends Component {
             <div style={{margin: 'auto', width: '50%'}}>
               {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
             </div>
-            
+
+            <div className={showHideClassName}>
+              <section className='modal-main'>
+                Are you sure you want to delete your account?
+                <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Cancel</button>
+                <button type="button" className="btn btn-danger" onClick={this.onDeleteClick}>Delete</button>
+              </section>
+            </div>
             <div style={{ marginBottom: '30px' }} />
-            <button onClick={this.onDeleteClick} className="btn btn-danger mb-5">Delete My Account</button>
+            <button className="btn btn-danger mb-5" type="button" onClick={this.showModal}>Delete My Account</button>
           </div>
         );
       } else {

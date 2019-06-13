@@ -85,22 +85,20 @@ export const getProfiles = () => dispatch => {
 
 // Delete account & profile
 export const deleteAccount = () => dispatch => {
-  if (window.confirm('Are you sure you want to delete your account?')) {
-    axios
-      .delete('/api/profile')
-      .then(res => 
-        dispatch({
-          type: SET_CURRENT_USER,
-          payload: {}
-        })  
-      )
-      .catch(err => 
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response.data
-        })  
-      );
-  }
+  axios
+    .delete('/api/profile')
+    .then(res => 
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: {}
+      })  
+    )
+    .catch(err => 
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })  
+    );
 };
 
 // Profile loading
