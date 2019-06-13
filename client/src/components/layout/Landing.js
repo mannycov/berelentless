@@ -20,7 +20,7 @@ class Landing extends Component {
               <div className="col-md-12 text-center">
                 <h1 className="display-3 mb-4">BeRelentless
                 </h1>
-                <h5 className="text-secondary">Set goals for yourself and pursue them relentlessly</h5>
+                <h4 className="text-primary">Set goals for yourself and pursue them relentlessly</h4>
                 <hr />
                 <Link to="/register" className="btn btn-lg btn-primary mr-2">Sign Up</Link>
                 <Link to="/login" className="btn btn-lg btn-light">Log In</Link>

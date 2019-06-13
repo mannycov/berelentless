@@ -8,6 +8,7 @@ import Spinner from '../common/Spinner';
 import GoalForm from '../goals/GoalForm';
 import GoalItem from '../goals/GoalItem';
 import ProfileActions from './ProfileActions';
+import DeleteAccount from './DeleteAccount';
 
 class Dashboard extends Component {
   state = {
@@ -35,7 +36,6 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
     let { goals } = this.props.goal;
-    const showHideClassName = this.state.show ? 'modal display-block' : 'modal display-none'; 
     let dashboardContent;
     goals = goals.filter(goal => goal.user === user.id);
 
@@ -55,27 +55,11 @@ class Dashboard extends Component {
             <div style={{margin: 'auto', width: '50%'}}>
               {goals.map(goal => <GoalItem key={goal._id} goal={goal} /> )}
             </div>
-
-            {/* Delete account Modal */}
-            <div className={showHideClassName}>
-              <div className="modal-dialog modal-dialog-centered" role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title">Delete Account</h5>
-                    <button type="button" onClick={this.closeModal} className="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    <p>Are you sure you want to delete your account?</p>
-                  </div>
-                  <div className="modal-footer">
-                    <button type="button" onClick={this.onDeleteClick} className="btn btn-danger">Delete</button>
-                    <button type="button" onClick={this.closeModal} className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DeleteAccount
+              show={this.state.show}
+              closeModal={this.closeModal}
+              deleteAccount={this.onDeleteClick}
+            />
             <div style={{ marginBottom: '30px' }} />
             <button className="btn btn-danger mb-5" type="button" onClick={this.showModal}>Delete My Account</button>
           </div>
