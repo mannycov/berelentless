@@ -2,6 +2,8 @@
 
 A social networking app designed to help you reach your fitness goals
 
+Visit the live demo [here](https://hidden-hamlet-43480.herokuapp.com)
+
 ## Getting Started
 
 ```bash
@@ -37,11 +39,11 @@ module.exports = {
   secretAccessKey: 'YOUR_OWN_SECRET_ACCESS_KEY'
 };
 
+```
+
 ## Deployment
 
 Deployed using Heroku
-
-Visit the live demo [here](https://hidden-hamlet-43480.herokuapp.com/)
 
 ## Built With
 
