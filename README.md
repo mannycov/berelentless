@@ -2,7 +2,7 @@
 
 A social networking app designed to help you reach your fitness goals
 
-Visit the live demo [here](https://hidden-hamlet-43480.herokuapp.com)
+Visit the app at [berelentless.io](http://www.berelentless.io)
 
 ## Getting Started
 
@@ -55,7 +55,7 @@ The MERN Stack
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
 ## Acknowledgments
 
