@@ -51,7 +51,7 @@ The MERN Stack
 
 ## Authors
 
-* **Emanuel Covarrubais**
+* **Emanuel Covarrubias**
 
 ## License
 
