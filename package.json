@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/mannycov/berelentless/issues"
   },
-  "homepage": "https://github.com/mannycov/berelentless#readme",
+  "homepage": "http://www.berelentless.io",
   "dependencies": {
     "aws-sdk": "^2.466.0",
     "bcryptjs": "^2.4.3",
