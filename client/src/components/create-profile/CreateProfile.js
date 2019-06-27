@@ -6,12 +6,14 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import { createProfile } from '../../actions/profileActions';
+import * as loadImage from 'blueimp-load-image';
 
 class CreateProfile extends Component {
   state = {
     displaySocialInputs: false,
     handle: '',
     photo: '',
+    photoOrientation: '',
     location: '',
     interests: '',
     bio: '',
@@ -33,13 +35,21 @@ class CreateProfile extends Component {
   }
 
   onChangeFile = e => {
-    this.setState({ photo: e.target.files[0] })
+    this.setState({ photo: e.target.files[0] },
+      () => { 
+      loadImage(this.state.photo, (data) => {
+      if (data.exif) {
+        const orientation = data.exif.get('Orientation');
+        this.setState({photoOrientation: orientation});
+      }
+    }, { meta: true })});
   }
 
   onSubmit = e => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append('photoOrientation', this.state.photoOrientation);
     formData.append('handle', this.state.handle);
     formData.append('photo', this.state.photo);
     formData.append('location', this.state.location);

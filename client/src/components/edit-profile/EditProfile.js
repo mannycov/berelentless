@@ -7,12 +7,14 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
+import * as loadImage from 'blueimp-load-image';
 
 class EditProfile extends Component {
   state = {
     displaySocialInputs: false,
     handle: '',
     photo: '',
+    photoOrientation: '',
     location: '',
     interests: '',
     bio: '',
@@ -71,13 +73,21 @@ class EditProfile extends Component {
   }
 
   onChangeFile = e => {
-    this.setState({ photo: e.target.files[0] })
+    this.setState({ photo: e.target.files[0] },
+      () => { 
+      loadImage(this.state.photo, (data) => {
+      if (data.exif) {
+        const orientation = data.exif.get('Orientation');
+        this.setState({photoOrientation: orientation});
+      }
+    }, { meta: true })});
   }
 
   onSubmit = e => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append('photoOrientation', this.state.photoOrientation);
     formData.append('handle', this.state.handle);
     formData.append('photo', this.state.photo);
     formData.append('location', this.state.location);

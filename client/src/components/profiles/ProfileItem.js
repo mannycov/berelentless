@@ -7,18 +7,26 @@ class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
     let profilePhoto;
+    let photoClassName;
 
-    if (profile.photoLocation) {
-      profilePhoto = profile.photoLocation;
-    } else {
-      profilePhoto = profile.user.avatar;
-    }
+    if (profile.photoOrientation) {
+      if (profile.photoOrientation === '2') photoClassName = "profile-photo profile-item mirror";
+      if (profile.photoOrientation === '3') photoClassName = "profile-photo profile-item rotate-180";
+      if (profile.photoOrientation === '4') photoClassName = "profile-photo profile-item rotate-180-mirror";
+      if (profile.photoOrientation === '5') photoClassName = "profile-photo profile-item rotate-270-mirror";
+      if (profile.photoOrientation === '6') photoClassName = "profile-photo profile-item rotate-90";
+      if (profile.photoOrientation === '7') photoClassName = "profile-photo profile-item rotate-90-mirror";
+      if (profile.photoOrientation === '8') photoClassName = "profile-photo profile-item rotate-270";
+    } else photoClassName = "profile-photo profile-item"
+
+    if (profile.photoLocation) profilePhoto = profile.photoLocation;
+    else profilePhoto = profile.user.avatar;
 
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-2">
-            <img src={profilePhoto} alt="" className="rounded-circle" style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', height: '140px', width: '140px'}}/>
+            <img src={profilePhoto} alt="profile-img" className={photoClassName}/>
           </div>
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.user.name}</h3>

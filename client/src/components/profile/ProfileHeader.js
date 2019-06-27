@@ -6,20 +6,28 @@ class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
     let profilePhoto;
+    let photoClassName;
 
-    if (profile.photoLocation) {
-      profilePhoto = profile.photoLocation;
-    } else {
-      profilePhoto = profile.user.avatar;
-    }
+    if (profile.photoOrientation) {
+      if (profile.photoOrientation === '2') photoClassName = "profile-photo mirror";
+      if (profile.photoOrientation === '3') photoClassName = "profile-photo rotate-180";
+      if (profile.photoOrientation === '4') photoClassName = "profile-photo rotate-180-mirror";
+      if (profile.photoOrientation === '5') photoClassName = "profile-photo rotate-270-mirror";
+      if (profile.photoOrientation === '6') photoClassName = "profile-photo rotate-90";
+      if (profile.photoOrientation === '7') photoClassName = "profile-photo rotate-90-mirror";
+      if (profile.photoOrientation === '8') photoClassName = "profile-photo rotate-270";
+    } else photoClassName = "profile-photo"
 
+    if (profile.photoLocation) profilePhoto = profile.photoLocation;
+    else profilePhoto = profile.user.avatar;
+    
     return (
       <div className="row">
         <div className="col-md-12">
           <div className="card card-body bg-primary text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img className="rounded-circle" src={profilePhoto} alt="" style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', height: '240px', width: '240px'}}/>
+                <img className={photoClassName} src={profilePhoto} alt="profile-img" />
               </div>
             </div>
             <div className="text-center">

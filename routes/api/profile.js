@@ -31,6 +31,9 @@ const upload = multer({
     s3: s3,
     bucket: 'berelentlessapp',
     acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, Object.assign({}, req.body));
+    },
     key: function (req, file, cb) {
       cb(null , path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
     }
@@ -147,6 +150,7 @@ router.post('/', upload.single('photo'), passport.authenticate('jwt', { session:
   if (req.body.handle) profileFields.handle = req.body.handle;
   if (req.file) profileFields.photoName = req.file.key;
   if (req.file) profileFields.photoLocation = req.file.location;
+  if (req.file) profileFields.photoOrientation = req.file.metadata.photoOrientation;
   if (req.body.avatar) profileFields.avatar = req.body.avatar;
   if (req.body.location) profileFields.location = req.body.location;
   if (req.body.interests) profileFields.interests = req.body.interests;

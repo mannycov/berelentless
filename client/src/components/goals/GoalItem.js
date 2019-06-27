@@ -37,13 +37,21 @@ class GoalItem extends Component {
     } = this.props;
     let goalMetrics;
     let profilePhoto;
+    let photoClassName;
 
-    if (goal.profilePhoto) {
-      profilePhoto = goal.profilePhoto;
-    } else {
-      profilePhoto = goal.avatar;
-    }
+    if (goal.photoOrientation) {
+      if (goal.photoOrientation === '2') photoClassName = "profile-photo profile-goal  mirror";
+      if (goal.photoOrientation === '3') photoClassName = "profile-photo profile-goal rotate-180";
+      if (goal.photoOrientation === '4') photoClassName = "profile-photo profile-goal rotate-180-mirror";
+      if (goal.photoOrientation === '5') photoClassName = "profile-photo profile-goal rotate-270-mirror";
+      if (goal.photoOrientation === '6') photoClassName = "profile-photo profile-goal rotate-90";
+      if (goal.photoOrientation === '7') photoClassName = "profile-photo profile-goal rotate-90-mirror";
+      if (goal.photoOrientation === '8') photoClassName = "profile-photo profile-goal rotate-270";
+    } else photoClassName = "profile-photo profile-goal"
 
+    if (goal.profilePhoto) profilePhoto = goal.profilePhoto;
+    else profilePhoto = goal.avatar;
+    
     if (goal.category === 'Strength') {
       goalMetrics = (
         <div>
@@ -72,8 +80,7 @@ class GoalItem extends Component {
         <img
           src={profilePhoto}
           alt="profile-img"
-          className="rounded-circle card-img-top"
-          style={{display: 'block', margin: 'auto', marginTop: '10px', height: '160px', width: '160px'}}
+          className={photoClassName}
         />
         <div style={{ marginBottom: '30px' }} />
         <h5 className="text-center card-title">{goal.name}</h5>

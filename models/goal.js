@@ -46,6 +46,9 @@ const GoalSchema = new Schema({
   profilePhoto: {
     type: String
   },
+  photoOrientation: {
+    type: String
+  },
   name: {
     type: String
   },
