@@ -15,6 +15,7 @@ class CheckInChart extends Component {
         xAxes: [
           {
             display: true,
+            maxBarThickness: 100,
             gridLines: {
               display: false
             }
@@ -44,9 +45,9 @@ class CheckInChart extends Component {
             ticks: {
               beginAtZero: true
             }
-          }
+          },
         ]
-      }
+      },
     }
   }
   render() {
@@ -75,7 +76,7 @@ class CheckInChart extends Component {
       const minutes = checkins.map(checkin => checkin.minutes);
       const seconds = checkins.map(checkin => checkin.seconds);
       const minutesData = {
-        label: 'Minutes',
+        label: 'Minutessss',
         data: minutes,
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
         yAxisID: 'y-axis-1'
