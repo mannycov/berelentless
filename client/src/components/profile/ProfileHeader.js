@@ -16,10 +16,9 @@ class ProfileHeader extends Component {
       if (profile.photoOrientation === '6') photoClassName = "profile-photo rotate-90";
       if (profile.photoOrientation === '7') photoClassName = "profile-photo rotate-90-mirror";
       if (profile.photoOrientation === '8') photoClassName = "profile-photo rotate-270";
-    } else photoClassName = "profile-photo"
+    } else photoClassName = "profile-photo";
 
-    if (profile.photoLocation) profilePhoto = profile.photoLocation;
-    else profilePhoto = profile.user.avatar;
+    profile.photoLocation ? profilePhoto = profile.photoLocation : profilePhoto = profile.user.avatar;
     
     return (
       <div className="row">

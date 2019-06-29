@@ -41,8 +41,7 @@ class AppNavbar extends Component {
         if (profile.photoOrientation === '8') photoClassName = "profile-photo profile-nav rotate-270";
       } else photoClassName = "profile-photo profile-nav";
       
-      if (profile.photoLocation) profilePhoto = profile.photoLocation;
-      else profilePhoto = user.avatar;
+      profile.photoLocation ? profilePhoto = profile.photoLocation : profilePhoto = user.avatar;
     }
 
     const authLinks = (

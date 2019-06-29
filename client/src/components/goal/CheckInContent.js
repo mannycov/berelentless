@@ -5,9 +5,11 @@ import Moment from 'react-moment';
 import { deleteCheckIn } from '../../actions/goalActions';
 
  class CheckInContent extends Component {
+
    onDeleteClick = (goalId, checkInId) => {
     this.props.deleteCheckIn(goalId, checkInId);
    };
+  
   render() {
     const {
       checkins,
@@ -16,6 +18,7 @@ import { deleteCheckIn } from '../../actions/goalActions';
       auth
     } = this.props;
     let goalTableHead, checkInData;
+
     if (goal.category === 'Strength' || goal.category === 'Conditioning') {
       goalTableHead = (
         <tr>
@@ -71,6 +74,7 @@ import { deleteCheckIn } from '../../actions/goalActions';
         </tr>
       ));
     }
+
     return (
       <div>
         <h4 className="mb-4">Check Ins</h4>

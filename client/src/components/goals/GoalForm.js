@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
@@ -45,12 +46,14 @@ class GoalForm extends Component {
       minutes: this.state.minutes,
       seconds: this.state.seconds,
       days: this.state.days,
-      from: this.state.from,
-      to: this.state.to,
+      from: moment(this.state.from).format(),
+      to: moment(this.state.to).format(),
       description: this.state.description,
       name: user.name,
       avatar: user.avatar
     };
+
+    console.log(newGoal.from, newGoal.to)
 
     this.props.addGoal(newGoal);
     this.setState({

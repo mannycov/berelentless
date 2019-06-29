@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
@@ -40,7 +41,7 @@ class CheckInForm extends Component {
       minutes: this.state.minutes,
       seconds: this.state.seconds,
       note: this.state.note,
-      date: this.state.date
+      date: moment(this.state.date).format()
     };
     this.props.addCheckIn(goalId, newCheckIn);
     this.setState({ 

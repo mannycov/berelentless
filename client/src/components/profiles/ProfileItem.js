@@ -17,10 +17,9 @@ class ProfileItem extends Component {
       if (profile.photoOrientation === '6') photoClassName = "profile-photo profile-item rotate-90";
       if (profile.photoOrientation === '7') photoClassName = "profile-photo profile-item rotate-90-mirror";
       if (profile.photoOrientation === '8') photoClassName = "profile-photo profile-item rotate-270";
-    } else photoClassName = "profile-photo profile-item"
+    } else photoClassName = "profile-photo profile-item";
 
-    if (profile.photoLocation) profilePhoto = profile.photoLocation;
-    else profilePhoto = profile.user.avatar;
+    profile.photoLocation ? profilePhoto = profile.photoLocation : profilePhoto = profile.user.avatar;
 
     return (
       <div className="card card-body bg-light mb-3">
