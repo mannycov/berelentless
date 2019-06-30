@@ -7,7 +7,7 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const reduxDevTools = (window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) || compose;
 
 const store = createStore(
   rootReducer,
