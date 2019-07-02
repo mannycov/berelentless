@@ -167,6 +167,7 @@ class GoalForm extends Component {
                 />
                 {categoryTargets}
                 <TextFieldGroup
+                  placeholder="From"
                   name="from"
                   type="date"
                   value={from}
@@ -174,6 +175,7 @@ class GoalForm extends Component {
                   error={errors.from}
                 />
                 <TextFieldGroup
+                  placeholder="To"
                   name="to"
                   type="date"
                   value={to}

@@ -119,6 +119,7 @@ class CheckInForm extends Component {
               <div className="form-group">
                 {checkInFields}
                 <TextFieldGroup
+                  placeholder="Date"
                   name="date"
                   type="date"
                   value={date}
