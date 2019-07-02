@@ -79,7 +79,7 @@ class AppNavbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="https://github.com/mannycov/beactive">GitHub</a>
+          <a className="nav-link" href="https://github.com/mannycov/beactive" target="_blank" rel="noopener noreferrer">GitHub</a>
         </li>
       </ul>
     )
