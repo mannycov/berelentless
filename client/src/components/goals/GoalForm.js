@@ -53,8 +53,6 @@ class GoalForm extends Component {
       avatar: user.avatar
     };
 
-    console.log(newGoal.from, newGoal.to)
-
     this.props.addGoal(newGoal);
     this.setState({
       title: '',
