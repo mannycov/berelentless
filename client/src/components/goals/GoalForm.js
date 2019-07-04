@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import { addGoal } from '../../actions/goalActions';
+
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
-import { addGoal } from '../../actions/goalActions';
 
 class GoalForm extends Component {
 
@@ -17,8 +21,8 @@ class GoalForm extends Component {
     minutes: '',
     seconds: '',
     days: '',
-    from: '',
-    to: '',
+    from: new Date(),
+    to: new Date(),
     description: '',
     errors: {}
   }
@@ -30,7 +34,18 @@ class GoalForm extends Component {
   }
 
   onChange = e => {
-    this.setState({[e.target.name]: e.target.value});
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({[name]: value});
+  }
+
+  handleChangeStart = date => {
+    this.setState({ from: date });
+  }
+
+  handleChangeEnd = date => {
+    this.setState({ to: date });
   }
 
   onSubmit = e => {
@@ -54,6 +69,7 @@ class GoalForm extends Component {
     };
 
     this.props.addGoal(newGoal);
+
     this.setState({
       title: '',
       category: '',
@@ -63,8 +79,8 @@ class GoalForm extends Component {
       minutes: '',
       seconds: '',
       days: '',
-      from: '',
-      to: ''
+      from: new Date(),
+      to: new Date()
     });
   }
 
@@ -164,21 +180,30 @@ class GoalForm extends Component {
                   error={errors.category}
                 />
                 {categoryTargets}
-                <TextFieldGroup
-                  placeholder="From"
-                  name="from"
-                  type="date"
-                  value={from}
-                  onChange={this.onChange}
-                  error={errors.from}
+                From{' '}
+                <DatePicker
+c                 customInput={
+                    <TextFieldGroup
+                      name="from"
+                    />}
+                  selected={from}
+                  selectsStart
+                  startDate={from}
+                  endDate={to}
+                  onChange={this.handleChangeStart}
                 />
-                <TextFieldGroup
-                  placeholder="To"
-                  name="to"
-                  type="date"
-                  value={to}
-                  onChange={this.onChange}
-                  error={errors.to}
+                {' '}To{' '}
+                <DatePicker
+                  customInput={
+                    <TextFieldGroup
+                      name="to"
+                    />}
+                  selected={to}
+                  selectsEnd
+                  startDate={from}
+                  endDate={to}
+                  onChange={this.handleChangeEnd}
+                  minDate={from}
                 />
                 <TextAreaFieldGroup
                   placeholder="Write a description..."

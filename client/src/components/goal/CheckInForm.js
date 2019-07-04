@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import { addCheckIn } from '../../actions/goalActions';
+
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import { addCheckIn } from '../../actions/goalActions';
 
 class CheckInForm extends Component {
   state = {
@@ -12,7 +16,7 @@ class CheckInForm extends Component {
     reps: '',
     minutes: '',
     seconds: '',
-    date: '',
+    date: new Date(),
     checkin: false,
     note: '',
     errors: {}
@@ -29,6 +33,10 @@ class CheckInForm extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({[name]: value});
+  }
+
+  handleChange = date => {
+    this.setState({ date });
   }
 
   onSubmit = e => {
@@ -50,7 +58,7 @@ class CheckInForm extends Component {
       minutes: '',
       seconds: '',
       note: '',
-      date: ''
+      date: new Date()
     });
   }
   
@@ -118,13 +126,13 @@ class CheckInForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 {checkInFields}
-                <TextFieldGroup
-                  placeholder="Date"
-                  name="date"
-                  type="date"
-                  value={date}
-                  onChange={this.onChange}
-                  error={errors.date}
+                <DatePicker
+c                 customInput={
+                    <TextFieldGroup
+                      name="date"
+                    />}
+                  selected={date}
+                  onChange={this.handleChange}
                 />
                 <TextAreaFieldGroup
                   placeholder="Note"
