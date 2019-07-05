@@ -20,7 +20,7 @@ const TextFieldGroup = ({
         type={type}
         className={classnames('form-control form-control-lg', {
           'is-invalid': error
-        })}ß
+        })}
         placeholder={placeholder}
         name={name}
         value={value}
@@ -43,7 +43,6 @@ TextFieldGroup.propTypes = {
   info: PropTypes.string,
   error: PropTypes.string,
   type: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.string,
 };
