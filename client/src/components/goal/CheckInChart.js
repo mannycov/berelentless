@@ -76,7 +76,7 @@ class CheckInChart extends Component {
       const minutes = checkins.map(checkin => checkin.minutes);
       const seconds = checkins.map(checkin => checkin.seconds);
       const minutesData = {
-        label: 'Minutessss',
+        label: 'Minutes',
         data: minutes,
         backgroundColor: 'rgba(255, 99, 132, 0.6)',
         yAxisID: 'y-axis-1'
