@@ -16,33 +16,49 @@ const Profile = require('../../models/profile');
 const User = require('../../models/user');
 
 // s3 Keys
-const s3Keys = require('../../config/keys');
+// const s3Keys = require('../../config/keys');
 
 // Set s3
-const s3 = new aws.S3({
-  accessKeyId: s3Keys.accessKeyId,
-  secretAccessKey: s3Keys.secretAccessKey,
-  Bucket: 'berelentlessapp'
+// const s3 = new aws.S3({
+//   accessKeyId: s3Keys.accessKeyId,
+//   secretAccessKey: s3Keys.secretAccessKey,
+//   Bucket: 'berelentlessapp'
+// });
+
+// Set the storage engine
+const storage = multer.diskStorage({
+  destination: 'client/public/uploads/',
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
 });
 
-// Init upload & storage engine
+// Init Upload
 const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'berelentlessapp',
-    acl: 'public-read',
-    metadata: function (req, file, cb) {
-      cb(null, Object.assign({}, req.body));
-    },
-    key: function (req, file, cb) {
-      cb(null , path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
-    }
-  }),
-  limits: {fileSize: 8000000},
+  storage: storage,
   fileFilter: function(req, file, cb) {
     checkFileType(file, cb);
   }
 });
+
+// Init upload & storage engine
+// const upload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: 'berelentlessapp',
+//     acl: 'public-read',
+//     metadata: function (req, file, cb) {
+//       cb(null, Object.assign({}, req.body));
+//     },
+//     key: function (req, file, cb) {
+//       cb(null , path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
+//     }
+//   }),
+//   limits: {fileSize: 8000000},
+//   fileFilter: function(req, file, cb) {
+//     checkFileType(file, cb);
+//   }
+// });
 
 // Check File Type
 function checkFileType(file, cb) {

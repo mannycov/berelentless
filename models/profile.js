@@ -11,6 +11,10 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
+  profileImg: {
+    data: Buffer,
+    contentType: String
+  },
   photoName: {
     type: String
   },
