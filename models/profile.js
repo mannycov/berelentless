@@ -24,6 +24,9 @@ const ProfileSchema = new Schema({
   photoOrientation: {
     type: String
   },
+  filePath: {
+    type: String
+  },
   location: {
     type: String
   },

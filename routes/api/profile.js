@@ -27,7 +27,7 @@ const User = require('../../models/user');
 
 // Set the storage engine
 const storage = multer.diskStorage({
-  destination: 'client/public/uploads/',
+  destination: './client/public/uploads/',
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
@@ -89,6 +89,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
         errors.noprofile = 'There is no profile for this user';
         return res.status(404).json(errors);
       }
+      console.log('profile in get request: ', profile)
       res.json(profile)
     })
     .catch(err => res.status(404).json(err));
@@ -161,12 +162,14 @@ router.post('/', upload.single('photo'), passport.authenticate('jwt', { session:
   }
 
   // Get fields
+  console.log("req file: ", req.file)
   const profileFields = {};
   profileFields.user = req.user.id;
+  console.log('req file key: ', req.file.path)
   if (req.body.handle) profileFields.handle = req.body.handle;
-  if (req.file) profileFields.photoName = req.file.key;
-  if (req.file) profileFields.photoLocation = req.file.location;
-  if (req.file) profileFields.photoOrientation = req.file.metadata.photoOrientation;
+  if (req.file) profileFields.photoName = `/public/uploads/${req.file.filename}`;
+  if (req.file) profileFields.photoLocation = req.file.destination;
+  if (req.file.path) profileFields.filePath = req.file.path;
   if (req.body.avatar) profileFields.avatar = req.body.avatar;
   if (req.body.location) profileFields.location = req.body.location;
   if (req.body.interests) profileFields.interests = req.body.interests;

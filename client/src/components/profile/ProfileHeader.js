@@ -7,7 +7,9 @@ class ProfileHeader extends Component {
     const { profile } = this.props;
     let profilePhoto;
     let photoClassName;
+    console.log('profile: ', profile)
 
+    // Set the profile photo class name
     if (profile.photoOrientation) {
       if (profile.photoOrientation === '2') photoClassName = "profile-photo mirror";
       if (profile.photoOrientation === '3') photoClassName = "profile-photo rotate-180";
@@ -18,7 +20,10 @@ class ProfileHeader extends Component {
       if (profile.photoOrientation === '8') photoClassName = "profile-photo rotate-270";
     } else photoClassName = "profile-photo";
 
-    profile.photoLocation ? profilePhoto = profile.photoLocation : profilePhoto = profile.user.avatar;
+    // Set the profile photo variable
+    const filePath = profile.filePath;
+    const photoName = profile.photoName;
+    profile.photoLocation ? profilePhoto = `${profile.photoLocation}${profile.photoName}` : profilePhoto = profile.user.avatar;
     
     return (
       <div className="row">
@@ -26,7 +31,7 @@ class ProfileHeader extends Component {
           <div className="card card-body bg-primary text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img className={photoClassName} src={profilePhoto} alt="profile-img" />
+                {isEmpty(profilePhoto) ? null : (<img className={photoClassName} src={photoName} alt="profile-img" />)}
               </div>
             </div>
             <div className="text-center">
