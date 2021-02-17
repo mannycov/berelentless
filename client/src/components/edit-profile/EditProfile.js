@@ -136,7 +136,7 @@ class EditProfile extends Component {
             <Link to="/dashboard" className="btn btn-light">Go Back</Link>
               <h1 className="display-4 text-center">Edit Your Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
-              <small className="d-block pb-3">*To change your photo create a <a href="https://www.gravatar.com">Gravatar</a> account</small>
+              <small className="d-block pb-3">*To change your photo create a <a href="https://www.gravatar.com" target="_blank" rel="noopener noreferrer">Gravatar</a> account</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup 
                   placeholder="* Profile Handle"
