@@ -26,26 +26,22 @@
   },
   "homepage": "http://www.berelentless.io",
   "dependencies": {
-    "aws-sdk": "^2.466.0",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "bootstrap": "^4.3.1",
-    "concurrently": "^4.1.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.6.0",
+    "concurrently": "^4.1.2",
     "dotenv": "^8.2.0",
-    "express": "^4.16.4",
-    "firebase": "^7.19.1",
+    "express": "^4.17.1",
     "gravatar": "^1.8.1",
-    "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.10.2",
-    "multer": "^1.4.1",
-    "multer-s3": "^2.9.0",
-    "passport": "^0.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.17",
+    "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "path": "^0.12.7",
     "url": "^0.11.0",
-    "validator": "^10.10.0"
+    "validator": "^10.11.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.19.4"
   }
 }

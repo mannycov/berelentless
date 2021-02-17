@@ -5,25 +5,9 @@ import isEmpty from '../../validation/is-empty';
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
-    let profilePhoto;
-    let photoClassName;
-    console.log('profile: ', profile)
-
-    // Set the profile photo class name
-    if (profile.photoOrientation) {
-      if (profile.photoOrientation === '2') photoClassName = "profile-photo mirror";
-      if (profile.photoOrientation === '3') photoClassName = "profile-photo rotate-180";
-      if (profile.photoOrientation === '4') photoClassName = "profile-photo rotate-180-mirror";
-      if (profile.photoOrientation === '5') photoClassName = "profile-photo rotate-270-mirror";
-      if (profile.photoOrientation === '6') photoClassName = "profile-photo rotate-90";
-      if (profile.photoOrientation === '7') photoClassName = "profile-photo rotate-90-mirror";
-      if (profile.photoOrientation === '8') photoClassName = "profile-photo rotate-270";
-    } else photoClassName = "profile-photo";
 
     // Set the profile photo variable
-    const filePath = profile.filePath;
-    const photoName = profile.photoName;
-    profile.photoLocation ? profilePhoto = `${profile.photoLocation}${profile.photoName}` : profilePhoto = profile.user.avatar;
+    const userPhoto = profile.user.avatar;
     
     return (
       <div className="row">
@@ -31,7 +15,7 @@ class ProfileHeader extends Component {
           <div className="card card-body bg-primary text-white mb-3">
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                {isEmpty(profilePhoto) ? null : (<img className={photoClassName} src={photoName} alt="profile-img" />)}
+                <img className="profile-photo" src={userPhoto} alt="profile" />
               </div>
             </div>
             <div className="text-center">

@@ -26,23 +26,8 @@ class AppNavbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const { profile } = this.props.profile;
-    let profilePhoto;
-    let photoClassName;
-    
-    if (profile !== null) {
-      if (profile.photoOrientation) {
-        if (profile.photoOrientation === '2') photoClassName = "profile-photo profile-nav mirror";
-        if (profile.photoOrientation === '3') photoClassName = "profile-photo profile-nav rotate-180";
-        if (profile.photoOrientation === '4') photoClassName = "profile-photo profile-nav rotate-180-mirror";
-        if (profile.photoOrientation === '5') photoClassName = "profile-photo profile-nav rotate-270-mirror";
-        if (profile.photoOrientation === '6') photoClassName = "profile-photo profile-nav rotate-90";
-        if (profile.photoOrientation === '7') photoClassName = "profile-photo profile-nav rotate-90-mirror";
-        if (profile.photoOrientation === '8') photoClassName = "profile-photo profile-nav rotate-270";
-      } else photoClassName = "profile-photo profile-nav";
-      
-      profile.photoLocation ? profilePhoto = profile.photoLocation : profilePhoto = user.avatar;
-    }
+    // Set the profile photo variable
+    const userPhoto = user.avatar;
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
@@ -59,7 +44,7 @@ class AppNavbar extends Component {
         <li className="nav-item">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a className="nav-link" onClick={this.onLogoutClick} href="#">
-            <img className={photoClassName} src={profilePhoto} alt={user.name} title="You must upload a photo or have a Gravatar connected to your email to display an image" />{' '}
+            <img className="profile-photo profile-nav" src={userPhoto} alt={user.name} title="You must upload a photo or have a Gravatar connected to your email to display an image" />{' '}
             Log Out
           </a>
         </li>

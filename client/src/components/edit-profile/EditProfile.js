@@ -7,14 +7,11 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
-import * as loadImage from 'blueimp-load-image';
 
 class EditProfile extends Component {
   state = {
     displaySocialInputs: false,
     handle: '',
-    photo: '',
-    photoOrientation: '',
     location: '',
     interests: '',
     bio: '',
@@ -56,7 +53,6 @@ class EditProfile extends Component {
       // Set component fields state
       this.setState({
         handle: profile.handle,
-        photo: profile.photo,
         location: profile.location,
         interests: interestsCSV,
         bio: profile.bio,
@@ -72,24 +68,11 @@ class EditProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onChangeFile = e => {
-    this.setState({ photo: e.target.files[0] },
-      () => { 
-      loadImage(this.state.photo, (data) => {
-      if (data.exif) {
-        const orientation = data.exif.get('Orientation');
-        this.setState({photoOrientation: orientation});
-      }
-    }, { meta: true })});
-  }
-
   onSubmit = e => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('photoOrientation', this.state.photoOrientation);
     formData.append('handle', this.state.handle);
-    formData.append('photo', this.state.photo);
     formData.append('location', this.state.location);
     formData.append('interests', this.state.interests);
     formData.append('bio', this.state.bio);
@@ -153,6 +136,7 @@ class EditProfile extends Component {
             <Link to="/dashboard" className="btn btn-light">Go Back</Link>
               <h1 className="display-4 text-center">Edit Your Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
+              <small className="d-block pb-3">*To change your photo create a <a href="https://www.gravatar.com">Gravatar</a> account</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup 
                   placeholder="* Profile Handle"
@@ -162,15 +146,6 @@ class EditProfile extends Component {
                   error={errors.handle}
                   info="A unique handle for your profile"
                 />
-                <div className="input-group mb-3">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                  </div>
-                  <div className="custom-file">
-                    <input className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="photo" type="file" onChange={this.onChangeFile} />
-                    <label htmlFor="inputGroupFile01" className="custom-file-label">Choose Your Photo</label>
-                  </div>
-                </div>
                 <TextFieldGroup 
                   placeholder="Location"
                   name="location"
