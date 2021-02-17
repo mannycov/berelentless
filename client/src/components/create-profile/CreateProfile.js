@@ -6,14 +6,11 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import { createProfile } from '../../actions/profileActions';
-import * as loadImage from 'blueimp-load-image';
 
 class CreateProfile extends Component {
   state = {
     displaySocialInputs: false,
     handle: '',
-    photo: '',
-    photoOrientation: '',
     location: '',
     interests: '',
     bio: '',
@@ -34,24 +31,11 @@ class CreateProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onChangeFile = e => {
-    this.setState({ photo: e.target.files[0] },
-      () => { 
-      loadImage(this.state.photo, (data) => {
-      if (data.exif) {
-        const orientation = data.exif.get('Orientation');
-        this.setState({photoOrientation: orientation});
-      }
-    }, { meta: true })});
-  }
-
   onSubmit = e => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('photoOrientation', this.state.photoOrientation);
     formData.append('handle', this.state.handle);
-    formData.append('photo', this.state.photo);
     formData.append('location', this.state.location);
     formData.append('interests', this.state.interests);
     formData.append('bio', this.state.bio);
@@ -117,6 +101,7 @@ class CreateProfile extends Component {
                 Input your information here
               </p>
               <small className="d-block pb-3">* = required fields</small>
+              <small className="d-block pb-3">*To manage your avatar photo go to <a href="https://www.gravatar.com" target="_blank" rel="noopener noreferrer">Gravatar</a></small>
               <form onSubmit={this.onSubmit} encType="multipart/form-data">
                 <TextFieldGroup 
                   placeholder="* Profile Handle"
@@ -126,15 +111,6 @@ class CreateProfile extends Component {
                   error={errors.handle}
                   info="A unique handle for your profile"
                 />
-                <div className="input-group mb-3">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                  </div>
-                  <div className="custom-file">
-                    <input className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="photo" type="file" onChange={this.onChangeFile} />
-                    <label htmlFor="inputGroupFile01" className="custom-file-label">Choose Your Photo</label>
-                  </div>
-                </div>
                 <TextFieldGroup 
                   placeholder="Location"
                   name="location"
