@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const multer = require('multer');
 const mongoose = require('mongoose');
 const passport = require('passport');
+
+const upload = multer();
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
@@ -87,7 +90,7 @@ router.get('/user/:user_id', (req, res) => {
 // @route POST api/profile
 // @desc Create or edit user's profile
 // @access Private
-router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/', upload.fields([]), passport.authenticate('jwt', { session: false }), (req, res) => {
   const { errors, isValid } = validateProfileInput(req.body);
 
   // Check Validation
@@ -125,7 +128,9 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
           { $set: profileFields },
           { new: true }
         )
-        .then(profile => res.json(profile));
+        .then(profile => {
+          return res.json(profile);
+        });
       } else {
       // Create
       // Check if handle exists

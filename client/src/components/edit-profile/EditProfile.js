@@ -80,7 +80,7 @@ class EditProfile extends Component {
     formData.append('twitter', this.state.twitter);
     formData.append('facebook', this.state.facebook);
     formData.append('instagram', this.state.instagram);
-
+    
     this.props.createProfile(formData, this.props.history);
   }
 
@@ -137,7 +137,7 @@ class EditProfile extends Component {
               <h1 className="display-4 text-center">Edit Your Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <small className="d-block pb-3">*To manage your avatar photo go to <a href="https://www.gravatar.com" target="_blank" rel="noopener noreferrer">Gravatar</a></small>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit} encType="multipart/form-data">
                 <TextFieldGroup 
                   placeholder="* Profile Handle"
                   name="handle"
