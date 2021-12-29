@@ -182,7 +182,7 @@ class GoalForm extends Component {
                 {categoryTargets}
                 From{' '}
                 <DatePicker
-c                 customInput={
+                 customInput={
                     <TextFieldGroup
                       name="from"
                     />}
